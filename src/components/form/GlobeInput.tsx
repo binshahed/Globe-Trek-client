@@ -12,6 +12,8 @@ interface TInputProps {
   errorMessage?: string;
   disable?: boolean;
   defaultValue?: any;
+  value?: string;
+  onChange?: any;
 }
 
 const GlobeInput = ({
@@ -22,6 +24,8 @@ const GlobeInput = ({
   name,
   disable,
   defaultValue,
+  value,
+  onChange,
   ...restProps
 }: TInputProps) => {
   const {
@@ -39,6 +43,8 @@ const GlobeInput = ({
       size={size}
       disabled={disable}
       defaultValue={defaultValue}
+      value={value}
+      onChange={onChange}
       {...restProps}
     />
   );

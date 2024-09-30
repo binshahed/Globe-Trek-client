@@ -16,6 +16,7 @@ import { toast } from "sonner"; // Assume you're using a toast notification syst
 import { TUserData } from "@/src/types/TUser";
 import Image from "next/image";
 import { useUpdateProfileMutation } from "@/src/store/features/user/userApi";
+import envConfig from "@/src/config";
 
 export default function UpdateUserProfile({ user }: { user: TUserData }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -38,9 +39,8 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
     formData.append("image", file);
 
     try {
-      const imageBBApiKey = "9f9bd6cf0f193d3c6b4f9a630c233e03"; // Replace with your ImageBB API Key
       const response = await fetch(
-        `https://api.imgbb.com/1/upload?key=${imageBBApiKey}`,
+        `https://api.imgbb.com/1/upload?key=${envConfig.image_bb}`,
         {
           method: "POST",
           body: formData

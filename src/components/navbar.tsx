@@ -20,6 +20,7 @@ import { useCurrentUser } from "../store/features/auth/authSlice";
 import { useEffect, useState } from "react";
 import { TUserData } from "../types/TUser";
 import AvatarDropDown from "./UI/nav/AvatarDropDown";
+import { Link } from "@nextui-org/link";
 
 export const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -69,6 +70,7 @@ export const Navbar = () => {
         {!(user as TUserData | null)?.data?.role && (
           <NavbarItem className="hidden md:flex">
             <Button
+              as={Link}
               className="text-sm font-normal text-default-600 bg-default-100"
               href="/login"
             >

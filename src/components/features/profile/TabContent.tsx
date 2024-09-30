@@ -5,17 +5,29 @@ import { useUserQuery } from "@/src/store/features/user/userApi";
 import { Button, Tab, Tabs } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import UpdateUserProfile from "../../modals/UpdateUserProfile";
+import CreatePost from "./CreatePost";
+import { getMyBlog } from "@/src/service/blogs";
+import BlogProfileCard from "../../cards/BlogProfileCard";
 
 const TabContent = ({ blog }: { blog: any }) => {
   const { data } = useUserQuery(undefined);
 
-  console.log("user", data?.data);
+  console.log("blog", blog);
 
   return (
     <>
       <UpdateUserProfile user={data} />
       <Tabs variant="underlined" aria-label="Tabs variants">
-        <Tab key="post" title="Posts" />
+        <Tab key="post" title="Posts">
+          <CreatePost />
+          {blog?.data.map((post: any) => (
+            <BlogProfileCard key={post?._id} blog={post} />
+            // <div key={post._id} className="border p-3 rounded my-2">
+            //   <p>{post.title}</p>
+            //   <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            // </div>
+          ))}
+        </Tab>
         <Tab key="followers" title="Followers">
           <p>Total {data?.data?.followers.length} Followers</p>
           {data &&
