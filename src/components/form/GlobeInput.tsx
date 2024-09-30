@@ -10,6 +10,8 @@ interface TInputProps {
   name: string;
   className?: string;
   errorMessage?: string;
+  disable?: boolean;
+  defaultValue?: any;
 }
 
 const GlobeInput = ({
@@ -18,6 +20,8 @@ const GlobeInput = ({
   size = "md",
   type = "string",
   name,
+  disable,
+  defaultValue,
   ...restProps
 }: TInputProps) => {
   const {
@@ -33,6 +37,8 @@ const GlobeInput = ({
       required={required}
       isInvalid={!!errors[name]}
       size={size}
+      disabled={disable}
+      defaultValue={defaultValue}
       {...restProps}
     />
   );

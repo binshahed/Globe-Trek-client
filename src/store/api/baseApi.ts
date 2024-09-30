@@ -10,9 +10,10 @@ import {
 // import { TError } from "../../../types/error.Type";
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
+import envConfig from "@/src/config";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: envConfig.baseApi,
   credentials: "include",
 
   prepareHeaders: (headers, { getState }) => {
