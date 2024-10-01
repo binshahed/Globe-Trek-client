@@ -1,6 +1,7 @@
 "use server";
 import { axiosInstance } from "@/src/lib/axiosInstance";
 import { revalidateTag } from "next/cache";
+// import { toast } from "sonner";
 
 // Fetch the user's blogs
 export const getMyBlog = async () => {
@@ -8,6 +9,7 @@ export const getMyBlog = async () => {
     const { data } = await axiosInstance.get("/blog/my-blog"); // Removed fetchOptions as axios doesn't support this
     return data;
   } catch (error: any) {
+    // toast.error(error?.response?.data?.message);
     throw new Error(
       error?.response?.data?.message || "Failed to fetch blog data"
     );

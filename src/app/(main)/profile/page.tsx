@@ -1,3 +1,5 @@
+"use server";
+
 import TabContent from "@/src/components/features/profile/TabContent";
 import UpdateUserProfile from "@/src/components/modals/UpdateUserProfile";
 import Container from "@/src/components/UI/Container";
@@ -5,8 +7,6 @@ import envConfig from "@/src/config";
 import { getMyBlog } from "@/src/service/blogs";
 
 import { User } from "@nextui-org/user";
-
-import React from "react";
 
 const Profile = async () => {
   const blogData = await getMyBlog();

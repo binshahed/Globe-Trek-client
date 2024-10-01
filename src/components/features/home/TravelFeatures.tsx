@@ -10,15 +10,16 @@ const TravelFeatures = () => {
           <h2 className="text-6xl font-semibold">Travel Essential Tips</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
+          <div className="w-full h-60 sm:h-80 lg:h-96 relative rounded-lg overflow-hidden shadow-lg">
             <Image
-              className="rounded-lg"
               src="/travelFeatures.jpg"
-              alt=""
-              width={1000}
-              height={350}
+              alt="Featured Image"
+              layout="fill"
+              objectFit="cover"
+              className="transition-transform duration-300 ease-in-out hover:scale-105"
             />
           </div>
+
           <div className="flex items-center px-10">
             <div>
               <h3 className="text-4xl font-semibold mb-5  group relative ">

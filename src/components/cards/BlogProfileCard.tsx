@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 
 import moment from "moment";
+import Link from "next/link";
 
 export default function BlogProfileCard({ blog }: { blog: any }) {
   const [isFollowed, setIsFollowed] = React.useState(false);
@@ -48,14 +49,28 @@ export default function BlogProfileCard({ blog }: { blog: any }) {
         </Button>
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
-        <div
-          dangerouslySetInnerHTML={{
-            __html:
-              blog.content.length > 200
-                ? blog.content.slice(0, 200) + "..."
-                : blog.content
-          }}
-        />
+        <Link
+          href={`/blog/${blog?._id}`}
+          className="text-2xl dark:hover:text-gray-300 hover:text-gray-500 font-bold dark:text-white "
+        >
+          {blog?.title}
+        </Link>
+        <h6 className="text-md  dark:text-gray-200">{blog?.slug}</h6>
+        <div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html:
+                blog.content.length > 200
+                  ? blog.content.slice(0, 200) + "..."
+                  : blog.content
+            }}
+          />
+          {blog.content.length > 200 && (
+            <Link className="text-blue-400 mt-3" href={`/blog/${blog?._id}`}>
+              Read Full
+            </Link>
+          )}
+        </div>
       </CardBody>
       <CardFooter className="gap-3">
         <div className="flex gap-1">
