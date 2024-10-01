@@ -13,6 +13,7 @@ import {
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import UpdateBlogModal from "../modals/UpdateBlogModal";
 
 export default function BlogProfileCard({ blog }: { blog: any }) {
   const [isFollowed, setIsFollowed] = useState(false);
@@ -70,6 +71,7 @@ export default function BlogProfileCard({ blog }: { blog: any }) {
             {isFollowed ? "Unfollow" : "Follow"}
           </Button>
         )}
+        <UpdateBlogModal blogData={blog} />
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
         <Link
