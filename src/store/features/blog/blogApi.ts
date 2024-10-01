@@ -8,8 +8,26 @@ const blogApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data
       })
+    }),
+    likeBlog: builder.mutation({
+      query: (data) => ({
+        url: `/blog/like/${data.id}`,
+        method: "PATCH"
+      }),
+      invalidatesTags: ["blog"]
+    }),
+    dislikeBlog: builder.mutation({
+      query: (data) => ({
+        url: `/blog/dislike/${data.id}`,
+        method: "PATCH"
+      }),
+      invalidatesTags: ["blog"]
     })
   })
 });
 
-export const { useCreateBlogMutation } = blogApi;
+export const {
+  useCreateBlogMutation,
+  useLikeBlogMutation,
+  useDislikeBlogMutation
+} = blogApi;

@@ -1,4 +1,6 @@
-import React from "react";
+import { useCurrentUser } from "@/src/store/features/auth/authSlice";
+import { useFollowToggleMutation } from "@/src/store/features/user/userApi";
+import { useAppSelector } from "@/src/store/hooks";
 import {
   Card,
   CardHeader,
@@ -10,9 +12,28 @@ import {
 
 import moment from "moment";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function BlogProfileCard({ blog }: { blog: any }) {
-  const [isFollowed, setIsFollowed] = React.useState(false);
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [followToggle] = useFollowToggleMutation();
+
+  const user = useAppSelector(useCurrentUser);
+
+  useEffect(() => {
+    setIsFollowed(blog?.author?.followers.includes(user?.data?._id));
+  }, [user, blog?.author?._id]);
+
+  const handleFollowToggle = async () => {
+    try {
+      setIsFollowed(!isFollowed);
+      await followToggle({
+        userId: blog?.author?._id
+      });
+    } catch (error) {
+      console.error("Error following user:", error);
+    }
+  };
 
   return (
     <Card className="my-10">
@@ -33,20 +54,22 @@ export default function BlogProfileCard({ blog }: { blog: any }) {
             </h5>
           </div>
         </div>
-        <Button
-          className={
-            isFollowed
-              ? "bg-transparent text-foreground border-default-200"
-              : ""
-          }
-          color="primary"
-          radius="full"
-          size="sm"
-          variant={isFollowed ? "bordered" : "solid"}
-          onPress={() => setIsFollowed(!isFollowed)}
-        >
-          {isFollowed ? "Unfollow" : "Follow"}
-        </Button>
+        {user && user?.data?._id !== blog?.author?._id && (
+          <Button
+            className={
+              isFollowed
+                ? "bg-transparent text-foreground border-default-200"
+                : ""
+            }
+            color="primary"
+            radius="full"
+            size="sm"
+            variant={isFollowed ? "bordered" : "solid"}
+            onClick={handleFollowToggle}
+          >
+            {isFollowed ? "Unfollow" : "Follow"}
+          </Button>
+        )}
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
         <Link

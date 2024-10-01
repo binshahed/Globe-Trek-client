@@ -5,7 +5,8 @@ const userApi = baseApi.injectEndpoints({
     user: builder.query({
       query: () => ({
         url: "/auth/me"
-      })
+      }),
+      keepUnusedDataFor: 0
     }),
     updateProfile: builder.mutation({
       query: (profile) => ({
@@ -13,8 +14,20 @@ const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: profile
       })
+    }),
+    followToggle: builder.mutation({
+      query: (data) => ({
+        url: `/auth/follow`,
+        method: "PATCH",
+        body: data
+      }),
+      invalidatesTags: ["blog"]
     })
   })
 });
 
-export const { useUserQuery, useUpdateProfileMutation } = userApi;
+export const {
+  useUserQuery,
+  useUpdateProfileMutation,
+  useFollowToggleMutation
+} = userApi;

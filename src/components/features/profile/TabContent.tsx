@@ -1,18 +1,17 @@
 "use client";
-import { getMe } from "@/src/service/profile";
-import { useCurrentUser } from "@/src/store/features/auth/authSlice";
+
 import { useUserQuery } from "@/src/store/features/user/userApi";
-import { Button, Tab, Tabs } from "@nextui-org/react";
-import { useSelector } from "react-redux";
+import { Tab, Tabs } from "@nextui-org/react";
+
 import UpdateUserProfile from "../../modals/UpdateUserProfile";
 import CreatePost from "./CreatePost";
-import { getMyBlog } from "@/src/service/blogs";
+
 import BlogProfileCard from "../../cards/BlogProfileCard";
 
 const TabContent = ({ blog }: { blog: any }) => {
   const { data } = useUserQuery(undefined);
 
-  console.log("blog", blog);
+
 
   return (
     <>
