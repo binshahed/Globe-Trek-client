@@ -11,9 +11,9 @@ export const getUser = async () => {
 
   if (accessToken) {
     try {
-      getDecodedToken = jwtDecode(accessToken); // Decode synchronously
-      console.log("Decoded Token:", getDecodedToken); // Debugging line
-      return getDecodedToken; // Make sure this returns the entire user object including the role
+      getDecodedToken = jwtDecode(accessToken);
+
+      return getDecodedToken;
     } catch (error) {
       console.log("Invalid token", error);
       throw new Error("Invalid token");

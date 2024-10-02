@@ -10,11 +10,19 @@ import { createBlog } from "@/src/service/blogs";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "@/src/store/features/auth/authSlice";
 import { toast } from "sonner"; // Import Sonner
+import { useGetCategoryQuery } from "@/src/store/features/category/categoryApi";
+import GlobeSelect from "../../form/GlobeSelect";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const CreatePost = () => {
   const user = useSelector(useCurrentUser);
+
+  const {
+    data: categoryData,
+    isLoading,
+    isSuccess
+  } = useGetCategoryQuery(undefined);
 
   const [title, setTitle] = useState(""); // Title state
   const [slug, setSlug] = useState(""); // Slug state
@@ -22,6 +30,8 @@ const CreatePost = () => {
   const [imageFile, setImageFile] = useState<File | null>(null); // File for uploading
   const [imagePreview, setImagePreview] = useState<string | null>(null); // Preview URL
   const [loading, setLoading] = useState(false); // For loading state
+  const [category, setCategory] = useState(""); // Category state
+  const [subscription, setSubscription] = useState("free"); // Subscription state
 
   // Generate image preview when an image is selected
   useEffect(() => {
@@ -57,7 +67,7 @@ const CreatePost = () => {
     }
   };
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async () => {
     setLoading(true); // Set loading state
 
     try {
@@ -73,9 +83,13 @@ const CreatePost = () => {
         title,
         slug,
         content,
+        category, // Include category
+        subscription, // Include subscription type
         author: user?.data?._id,
         featuredImage: uploadedImageUrl // Set uploaded image URL
       };
+
+      console.log(postData);
 
       // 3. Submit the blog data to the backend
       const response = await createBlog(postData);
@@ -91,6 +105,10 @@ const CreatePost = () => {
       setContent("");
       setImageFile(null);
       setImagePreview(null);
+      setCategory("");
+      setSubscription("free");
+
+      window.location.reload();
     } catch (error: any) {
       console.error(error.message);
       toast.error(error.message || "Failed to create post. Please try again."); // Sonner error message
@@ -98,6 +116,15 @@ const CreatePost = () => {
       setLoading(false); // Reset loading state
     }
   };
+
+  let categoryOptions = [];
+
+  if (!isLoading && isSuccess) {
+    categoryOptions = categoryData?.data?.map((c: any) => ({
+      label: c.name,
+      value: c._id
+    }));
+  }
 
   return (
     <div>
@@ -118,6 +145,35 @@ const CreatePost = () => {
           required
         />
         <br />
+
+        {/* Category Dropdown */}
+        <GlobeSelect
+          name="category"
+          options={categoryOptions}
+          label="Select Category"
+          loading={isLoading}
+          onChange={(e: any) => setCategory(e?.target?.value)} // Handle category selection
+        />
+
+        {/* Subscription Dropdown */}
+        <GlobeSelect
+          className="my-4"
+          name="subscription"
+          options={[
+            {
+              label: "Free",
+              value: "free"
+            },
+            {
+              label: "Premium",
+              value: "premium"
+            }
+          ]}
+          label="Select Subscription"
+          onChange={(e: any) => setSubscription(e?.target?.value)} // Handle subscription selection
+        />
+        <br />
+
         <ReactQuill value={content} onChange={setContent} />
         <br />
         <input

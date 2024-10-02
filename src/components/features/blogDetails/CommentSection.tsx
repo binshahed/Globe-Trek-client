@@ -15,6 +15,8 @@ import {
 import { useCurrentUser } from "@/src/store/features/auth/authSlice";
 import { useAppSelector } from "@/src/store/hooks";
 import { toast } from "sonner";
+import { TUserData } from "@/src/types/TUser";
+import PostLoading from "../../UI/PoastLoading";
 
 const CommentSection = ({
   blogId,
@@ -78,32 +80,31 @@ const CommentSection = ({
   return (
     <div className="mt-10 border rounded-3xl p-10">
       {/* Like and Dislike Buttons */}
-      <div className="flex items-center mx-3">
-        <Button
-          className="min-w-0 w-10 p-2 m-5"
-          isIconOnly
-          color={isLiked ? "success" : "primary"} // Change color if liked
-          aria-label={isLiked ? "Remove Like" : "Like"}
-          onClick={handleLike}
-          disabled={isLiking || isDisliking} // Disable while liking or disliking
-        >
-          <AiFillLike className="w-10 h-10" />
-        </Button>
-        <Button
-          className="min-w-0 w-10 p-2"
-          isIconOnly
-          color={isDisliked ? "danger" : "primary"} // Change color if disliked
-          aria-label={isDisliked ? "Remove Dislike" : "Dislike"}
-          onClick={handleDislike}
-          disabled={isLiking || isDisliking} // Disable while liking or disliking
-        >
-          <AiFillDislike className="w-10 h-10" />
-        </Button>
-      </div>
 
-      {/* Comments Section */}
-      <h3>Comments</h3>
-      <div className="py-10">
+      <div className="">
+        <div className="flex items-center mx-3">
+          <Button
+            className="min-w-0 w-10 p-2 m-5"
+            isIconOnly
+            color={isLiked ? "success" : "primary"} // Change color if liked
+            aria-label={isLiked ? "Remove Like" : "Like"}
+            onClick={handleLike}
+            disabled={isLiking || isDisliking || !user?.data?.email} // Disable while liking or disliking
+          >
+            <AiFillLike className="w-10 h-10" />
+          </Button>
+          <Button
+            className="min-w-0 w-10 p-2"
+            isIconOnly
+            color={isDisliked ? "danger" : "primary"} // Change color if disliked
+            aria-label={isDisliked ? "Remove Dislike" : "Dislike"}
+            onClick={handleDislike}
+            disabled={isLiking || isDisliking || !user?.data?.email} // Disable while liking or disliking
+          >
+            <AiFillDislike className="w-10 h-10" />
+          </Button>
+        </div>
+
         <Textarea
           label="Comment"
           variant="bordered"
@@ -112,18 +113,28 @@ const CommentSection = ({
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           className="w-full"
+          isDisabled={!user?.data?.email}
         />
-        <Button color="primary" className="mt-4" onClick={handlePostComment}>
+        <Button
+          color="primary"
+          className="mt-4"
+          onClick={handlePostComment}
+          isDisabled={!user?.data?.email}
+        >
           Post Comment
         </Button>
       </div>
 
       {/* Display comments or loading state */}
       {isLoading ? (
-        <p>Loading comments...</p>
+        <PostLoading />
       ) : (
         data?.data?.map((comment: any) => (
-          <CommentCard key={comment?._id} comment={comment} />
+          <CommentCard
+            key={comment?._id}
+            comment={comment}
+            user={user as TUserData}
+          />
         ))
       )}
     </div>

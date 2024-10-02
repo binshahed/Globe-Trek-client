@@ -1,5 +1,4 @@
 "use server";
-import envConfig from "@/src/config";
 import { axiosInstance } from "@/src/lib/axiosInstance";
 import { revalidateTag } from "next/cache";
 // import { toast } from "sonner";

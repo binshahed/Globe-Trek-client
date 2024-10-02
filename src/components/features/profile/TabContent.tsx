@@ -7,11 +7,13 @@ import UpdateUserProfile from "../../modals/UpdateUserProfile";
 import CreatePost from "./CreatePost";
 
 import BlogProfileCard from "../../cards/BlogProfileCard";
+import { useMyBlogQuery } from "@/src/store/features/blog/blogApi";
+import PostLoading from "../../UI/PoastLoading";
 
-const TabContent = ({ blog }: { blog: any }) => {
-  const { data } = useUserQuery(undefined);
+const TabContent = () => {
+  const { data, isLoading } = useUserQuery(undefined);
 
-
+  const { data: blogData } = useMyBlogQuery(undefined);
 
   return (
     <>
@@ -19,13 +21,17 @@ const TabContent = ({ blog }: { blog: any }) => {
       <Tabs variant="underlined" aria-label="Tabs variants">
         <Tab key="post" title="Posts">
           <CreatePost />
-          {blog?.data.map((post: any) => (
-            <BlogProfileCard key={post?._id} blog={post} />
-            // <div key={post._id} className="border p-3 rounded my-2">
-            //   <p>{post.title}</p>
-            //   <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            // </div>
-          ))}
+          {isLoading ? (
+            <PostLoading />
+          ) : (
+            blogData?.data?.map((post: any) => (
+              <BlogProfileCard key={post?._id} blog={post} />
+              // <div key={post._id} className="border p-3 rounded my-2">
+              //   <p>{post.title}</p>
+              //   <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              // </div>
+            ))
+          )}
         </Tab>
         <Tab key="followers" title="Followers">
           <p>Total {data?.data?.followers.length} Followers</p>

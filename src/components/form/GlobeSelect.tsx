@@ -13,6 +13,7 @@ interface TInputProps {
   options: TData[];
   placeholder?: string;
   loading?: boolean;
+  onChange: any;
 }
 
 interface TData {
@@ -24,12 +25,12 @@ const GlobeSelect = ({
   variant = "bordered",
   required = false,
   size = "md",
-  type = "string",
   name,
   options,
   label,
   placeholder = "Select an option",
   loading,
+  onChange,
   ...restProps
 }: TInputProps) => {
   const {
@@ -46,6 +47,7 @@ const GlobeSelect = ({
       variant={variant}
       required={required}
       isInvalid={!!errors[name]}
+      onChange={onChange}
       size={size}
       {...restProps}
     >

@@ -3,10 +3,20 @@
 import TabContent from "@/src/components/features/profile/TabContent";
 import Container from "@/src/components/UI/Container";
 import UserIcon from "@/src/components/UI/UserIcon";
-import { getMyBlog } from "@/src/service/blogs";
+import { getUser } from "@/src/service/authService";
+import { JwtPayload } from "jwt-decode";
+
+interface CustomJwtPayload extends JwtPayload {
+  data: {
+    name?: string;
+    email: string;
+    _id: string;
+  };
+}
 
 const Profile = async () => {
-  const blogData = await getMyBlog();
+  const res = await getUser();
+  const user = res as CustomJwtPayload;
 
   return (
     <Container>
@@ -19,12 +29,13 @@ const Profile = async () => {
       <div className="flex">
         <UserIcon />
         <div className="ml-8 mt-5">
-          <h5 className="text-3xl font-bold">Shahed Ahmed</h5>
-          <p className="text-sm ">5k Followers</p>
+          <h5 className="text-3xl font-bold">{user?.data?.name}</h5>
+          {user?.data?.email}
+          <p className="text-sm "></p>
         </div>
       </div>
       <div>
-        <TabContent blog={blogData} />
+        <TabContent />
       </div>
     </Container>
   );

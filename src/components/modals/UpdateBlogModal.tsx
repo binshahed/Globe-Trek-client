@@ -19,6 +19,7 @@ import { toast } from "sonner"; // Import Sonner
 import { CiEdit } from "react-icons/ci";
 import GlobeForm from "../form/GlobeForm";
 import GlobeInput from "../form/GlobeInput";
+import { useUpdateBlogMutation } from "@/src/store/features/blog/blogApi";
 
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -26,6 +27,8 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const UpdateBlogModal = ({ blogData }: { blogData: any }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const user = useSelector(useCurrentUser);
+
+  const [updateBlog] = useUpdateBlogMutation();
 
   const [title, setTitle] = useState(blogData?.title || "");
   const [slug, setSlug] = useState(blogData?.slug || "");
@@ -82,13 +85,11 @@ const UpdateBlogModal = ({ blogData }: { blogData: any }) => {
         featuredImage: uploadedImageUrl
       };
 
-      const response = ""; // Placeholder for actual update function
-
-      // await updateBlog(user?.data?._id, blogData._id, postData);
+      const response = updateBlog({ id: blogData?._id, data: postData });
 
       if (!response) throw new Error("Failed to update post");
 
-      toast.success("Post updated successfully!");
+      toast.success("Blog updated successfully!");
       onOpenChange(); // Close the modal on success
     } catch (error: any) {
       console.error(error.message);

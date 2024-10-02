@@ -1,23 +1,23 @@
 import { useCurrentUser } from "@/src/store/features/auth/authSlice";
 import { useFollowToggleMutation } from "@/src/store/features/user/userApi";
 import { useAppSelector } from "@/src/store/hooks";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Avatar,
-  Button
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Avatar, Button } from "@nextui-org/react";
 
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import UpdateBlogModal from "../modals/UpdateBlogModal";
+import { useDeleteBlogMutation } from "@/src/store/features/blog/blogApi";
+import { toast } from "sonner";
+import { TError } from "@/src/types/global.Type";
+import { MdDelete } from "react-icons/md";
 
 export default function BlogProfileCard({ blog }: { blog: any }) {
   const [isFollowed, setIsFollowed] = useState(false);
   const [followToggle] = useFollowToggleMutation();
+
+  const [deleteBlog, { isLoading, isSuccess, isError, error }] =
+    useDeleteBlogMutation();
 
   const user = useAppSelector(useCurrentUser);
 
@@ -36,8 +36,21 @@ export default function BlogProfileCard({ blog }: { blog: any }) {
     }
   };
 
+  const handleDeleteBlog = () => {
+    deleteBlog(blog?._id);
+  };
+
+  if (!isLoading && isSuccess) {
+    toast.success("Blog deleted successfully");
+  }
+  if (!isLoading && isError) {
+    toast.error((error as TError)?.data?.message);
+  }
+
+  const isOwner = user?.data?._id === blog?.author?._id;
+
   return (
-    <Card className="my-10">
+    <Card className="my-10 py-3">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar
@@ -71,7 +84,21 @@ export default function BlogProfileCard({ blog }: { blog: any }) {
             {isFollowed ? "Unfollow" : "Follow"}
           </Button>
         )}
-        <UpdateBlogModal blogData={blog} />
+        {isOwner && (
+          <div>
+            <UpdateBlogModal blogData={blog} />
+            <Button
+              isIconOnly
+              color="danger"
+              aria-label="Edit Post"
+              className="min-w-7 w-7 h-7 mt-2"
+              onClick={handleDeleteBlog}
+              isLoading={isLoading}
+            >
+              <MdDelete className="w-5 h-5" />
+            </Button>
+          </div>
+        )}
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400">
         <Link
@@ -97,16 +124,6 @@ export default function BlogProfileCard({ blog }: { blog: any }) {
           )}
         </div>
       </CardBody>
-      <CardFooter className="gap-3">
-        <div className="flex gap-1">
-          <p className="font-semibold text-default-400 text-small">4</p>
-          <p className=" text-default-400 text-small">Following</p>
-        </div>
-        <div className="flex gap-1">
-          <p className="font-semibold text-default-400 text-small">97.1K</p>
-          <p className="text-default-400 text-small">Followers</p>
-        </div>
-      </CardFooter>
     </Card>
   );
 }
