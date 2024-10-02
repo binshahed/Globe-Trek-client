@@ -14,15 +14,13 @@ import { loginValidationSchema } from "@/src/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { verifyToken } from "@/src/utils/verifyToken";
 import { TError } from "@/src/types/global.Type";
+import Link from "next/link";
+import ForgotPasswordModal from "@/src/components/modals/ForgotPasswordModal";
 
 const LoginPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectToReferrer = searchParams.get("redirect") || "/";
-
-  const newPath = redirectToReferrer.replace(/\+/g, "/");
-  console.log("n", newPath);
-  console.log("r", redirectToReferrer);
 
   const [login, { isLoading, isError, error, isSuccess }] = useLoginMutation();
   const dispatch = useAppDispatch();
@@ -44,7 +42,7 @@ const LoginPage = () => {
 
     if (isSuccess) {
       toast.success("Login successful");
-      window.location.reload();
+      // window.location.reload();
       router.push("/");
     }
   }, [isError, isSuccess, router, redirectToReferrer, error]);
@@ -79,6 +77,15 @@ const LoginPage = () => {
               type="password"
               errorMessage="Please enter your password"
             />
+            <div className="flex justify-between">
+              <ForgotPasswordModal />
+              <p className="text-right ">
+                Do Not have account?{" "}
+                <Link href="/register" className="text-blue-500">
+                  Register
+                </Link>
+              </p>
+            </div>
             <Button
               variant="solid"
               className="w-full my-4"

@@ -1,5 +1,5 @@
 import { PROTECTED_ROUTE } from "@/src/constant/protectedRoutes";
-import { removeCookies } from "@/src/service/authService";
+// import { removeCookies } from "@/src/service/authService";
 import { logout, useCurrentUser } from "@/src/store/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
 
@@ -20,7 +20,7 @@ const AvatarDropDown = () => {
   const router = useRouter();
   const handleLogout = () => {
     dispatch(logout());
-    removeCookies();
+    // removeCookies();
     if (PROTECTED_ROUTE.some((route) => pathName.match(route))) {
       router.push("/");
     }
@@ -44,23 +44,18 @@ const AvatarDropDown = () => {
         <DropdownItem key="profile" className="h-14 gap-2">
           <Link href="/profile" className="block">
             <p className="font-bold">Signed in as</p>
-            {/* <p className="font-bold">{user?.email}</p> */}
+            <p className="font-bold">{user?.data?.email}</p>
           </Link>
         </DropdownItem>
 
         <DropdownItem key="crate_post">
-          <Link href="/profile/create-post" className="block">
-            Create Post
+          <Link href="/profile/" className="block">
+            Profile
           </Link>
         </DropdownItem>
         <DropdownItem key="claim_request">
-          <Link href="/profile/claim-request" className="block">
-            Claim Request
-          </Link>
-        </DropdownItem>
-        <DropdownItem key="about">
-          <Link href="/profile/about" className="block">
-            About
+          <Link href="/profile/change-password" className="block">
+            Settings
           </Link>
         </DropdownItem>
 

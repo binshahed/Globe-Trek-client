@@ -13,7 +13,14 @@ import { toast } from "sonner"; // Import Sonner
 import { useGetCategoryQuery } from "@/src/store/features/category/categoryApi";
 import GlobeSelect from "../../form/GlobeSelect";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(
+  () => {
+    return import("react-quill");
+  },
+  { ssr: false }
+);
+
+const MyReactQuill = ReactQuill as any;
 
 const CreatePost = () => {
   const user = useSelector(useCurrentUser);
@@ -174,7 +181,7 @@ const CreatePost = () => {
         />
         <br />
 
-        <ReactQuill value={content} onChange={setContent} />
+        <MyReactQuill value={content || ""} onChange={setContent} />
         <br />
         <input
           type="file"

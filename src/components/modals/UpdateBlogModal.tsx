@@ -24,6 +24,8 @@ import { useUpdateBlogMutation } from "@/src/store/features/blog/blogApi";
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
+const MyQuill = ReactQuill as any;
+
 const UpdateBlogModal = ({ blogData }: { blogData: any }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const user = useSelector(useCurrentUser);
@@ -146,7 +148,7 @@ const UpdateBlogModal = ({ blogData }: { blogData: any }) => {
                     required
                   />
                   <br />
-                  <ReactQuill
+                  <MyQuill
                     style={{ maxHeight: "300px", overflow: "scroll" }}
                     value={content}
                     onChange={setContent}

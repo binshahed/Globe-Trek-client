@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 import { getUser } from "./service/authService";
 import { TUserData } from "./types/TUser";
 
-const AuthRoutes = ["/login", "/register"];
+const AuthRoutes = ["/login", "/login/reset-password", "/register"];
 
 const roleBasedRoutes: any = {
   user: [/^\/profile/],
@@ -53,6 +53,7 @@ export const config = {
     "/profile/:page*",
     "/admin",
     "/login",
+    "/login/reset-password",
     "/register",
     "/about"
   ]

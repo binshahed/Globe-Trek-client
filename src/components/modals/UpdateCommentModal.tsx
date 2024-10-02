@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useUpdateCommentMutation } from "@/src/store/features/comment/commentApi";
 import { TError } from "@/src/types/global.Type";
 import {
@@ -5,7 +6,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
   useDisclosure,
   Textarea
@@ -16,8 +16,7 @@ import { toast } from "sonner"; // Import toast from Sonner
 export default function UpdateCommentModal({ data }: { data: any }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [commentValue, setCommentValue] = useState(data?.comment);
-  const [updateComment, { isLoading, isError, error }] =
-    useUpdateCommentMutation();
+  const [updateComment, { isLoading, error }] = useUpdateCommentMutation();
 
   const handlePostComment = async () => {
     try {

@@ -42,7 +42,7 @@ const BaseQueryWithRefreshToken: BaseQueryFn<
   // if token is expired
   if (result.error?.status === 401) {
     // call for refresh token
-    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
+    const res = await fetch(`${envConfig.baseApi}/v1/auth/refresh-token`, {
       method: "POST",
       credentials: "include"
     });

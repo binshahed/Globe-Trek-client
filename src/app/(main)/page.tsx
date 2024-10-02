@@ -2,7 +2,7 @@ import BannerSection from "@/src/components/features/home/BannerSection";
 import BlogSection from "@/src/components/features/home/BlogSection";
 import TravelFeatures from "@/src/components/features/home/TravelFeatures";
 import Container from "@/src/components/UI/Container";
-import envConfig from "@/src/config";
+
 
 export default async function HomePage() {
   // const res = await fetch(`${envConfig.baseApi}/blog?limit=2`, {

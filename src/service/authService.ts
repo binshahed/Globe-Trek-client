@@ -22,7 +22,7 @@ export const getUser = async () => {
   return null; // Return null if no token is found
 };
 
-export const removeCookies = () => {
-  cookies().delete("accessToken");
-  cookies().delete("refreshToken");
-};
+// export const removeCookies = () => {
+//   cookies().delete("accessToken");
+//   cookies().delete("refreshToken");
+// };

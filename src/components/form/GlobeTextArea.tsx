@@ -1,4 +1,4 @@
-import { Input, Textarea } from "@nextui-org/input";
+import { Textarea } from "@nextui-org/input";
 import { useFormContext } from "react-hook-form";
 
 interface TInputProps {
@@ -16,8 +16,7 @@ interface TInputProps {
 const GlobeTextArea = ({
   variant = "bordered",
   required = false,
-  size = "md",
-  type = "string",
+
   label,
   name,
   placeholder,

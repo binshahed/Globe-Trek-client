@@ -15,27 +15,10 @@ export const loginValidationSchema = z.object({
     .min(6, "Password must be at least 6 characters")
 });
 
-export const registerValidationSchema = z.object({
-  name: z
-    .string({
-      required_error: "Name is required"
-    })
-    .trim(),
-  email: z
-    .string({
-      required_error: "Email is required"
-    })
-    .email("Please enter valid your email")
-    .trim(),
-  mobileNumber: z
-    .string({
-      required_error: "Mobile Number is required"
-    })
-    .trim(),
-  password: z
-    .string({
-      required_error: "Password is required"
-    })
-    .trim()
-    .min(6, "Password must be at least 6 characters")
+export const registerSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Please enter a valid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  phone: z.string().min(10, "Phone number must be at least 10 digits"),
+  address: z.string().min(5, "Address is required")
 });

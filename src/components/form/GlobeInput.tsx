@@ -38,6 +38,7 @@ const GlobeInput = ({
       {...register(name)}
       type={type}
       variant={variant}
+      name={name}
       required={required}
       isInvalid={!!errors[name]}
       size={size}
