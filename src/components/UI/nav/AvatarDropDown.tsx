@@ -1,5 +1,5 @@
 import { PROTECTED_ROUTE } from "@/src/constant/protectedRoutes";
-// import { removeCookies } from "@/src/service/authService";
+import { removeCookies } from "@/src/service/authService";
 import { logout, useCurrentUser } from "@/src/store/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
 
@@ -20,7 +20,7 @@ const AvatarDropDown = () => {
   const router = useRouter();
   const handleLogout = () => {
     dispatch(logout());
-    // removeCookies();
+    removeCookies();
     if (PROTECTED_ROUTE.some((route) => pathName.match(route))) {
       router.push("/");
     }

@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
 export const getUser = async () => {
-  const accessToken = cookies().get("refreshToken")?.value;
+  const accessToken = cookies().get("accessToken")?.value;
   let getDecodedToken = null;
 
   if (accessToken) {
@@ -22,7 +22,7 @@ export const getUser = async () => {
   return null; // Return null if no token is found
 };
 
-// export const removeCookies = () => {
-//   cookies().delete("accessToken");
-//   cookies().delete("refreshToken");
-// };
+export const removeCookies = () => {
+  cookies().delete("accessToken");
+  cookies().delete("refreshToken");
+};
