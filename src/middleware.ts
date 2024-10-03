@@ -14,6 +14,8 @@ const roleBasedRoutes: any = {
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
+  console.log(request);
+
   const { pathname } = request.nextUrl;
 
   // Fetch user data
@@ -31,17 +33,20 @@ export async function middleware(request: NextRequest) {
   }
 
   // Role-based access control
-  const userRole = (user as TUserData)?.data?.role; // Ensure this is correctly derived from the decoded token
+  const userRole = user?.role; // Ensure this is correctly derived from the decoded token
 
   if (userRole && roleBasedRoutes[userRole]) {
     const routes = roleBasedRoutes[userRole];
 
     // Check if the current pathname matches any routes for the user's role
     if (routes.some((route: any) => pathname.match(route))) {
+      console.log("test", user);
       return NextResponse.next();
     }
   }
 
+  
+  
   // If role doesn't match, redirect to the home page or an error page
   return NextResponse.redirect(new URL("/", request.url));
 }

@@ -24,6 +24,8 @@ import { Link } from "@nextui-org/link";
 
 export const Navbar = () => {
   const [user, setUser] = useState(null);
+  console.log("nav user", user);
+  
   const currentUser = useAppSelector(useCurrentUser);
 
   useEffect(() => {

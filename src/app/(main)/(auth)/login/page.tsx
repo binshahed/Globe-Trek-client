@@ -1,8 +1,7 @@
 "use client"; // Ensure this component is a Client Component
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useLoginMutation } from "@/src/store/features/auth/authApi";
 import { useAppDispatch } from "@/src/store/hooks";
 import { setUser } from "@/src/store/features/auth/authSlice";
 import { toast } from "sonner";
@@ -12,45 +11,52 @@ import { Button } from "@nextui-org/button";
 import { Spinner } from "@nextui-org/spinner";
 import { loginValidationSchema } from "@/src/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { verifyToken } from "@/src/utils/verifyToken";
-import { TError } from "@/src/types/global.Type";
-import Link from "next/link";
+import { loginUser } from "@/src/service/authService";
 import ForgotPasswordModal from "@/src/components/modals/ForgotPasswordModal";
+import Link from "next/link";
+import { verifyToken } from "@/src/utils/verifyToken";
 
 const LoginPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectToReferrer = searchParams.get("redirect") || "/";
+  const redirectToReferrer = searchParams.get("redirect") || "/"; // Default redirect to home
 
-  const [login, { isLoading, isError, error, isSuccess }] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const [isLoading, setLoading] = React.useState(false); // Track loading state
 
   const handleSubmit = async (data: { email: string; password: string }) => {
+    setLoading(true); // Set loading to true when login starts
+
     try {
-      const res = await login(data).unwrap();
-      const user = await verifyToken(res.data.accessToken); // Ensure verifyToken is defined
-      dispatch(setUser({ user, token: res.data.accessToken }));
-    } catch (err) {
-      toast.error("Login failed. Please check your credentials.");
+      const res = await loginUser(data); // Call loginUser service
+
+      // If login is successful
+      if (res.success) {
+        // Assuming the JWT contains the user info
+        console.log(res);
+
+        const verifyedToken = await verifyToken(res.data.accessToken); // Ensure verifyToken is defined
+
+        dispatch(setUser({ user: verifyedToken, token: res.data.accessToken }));
+
+        toast.success("Login successful");
+
+        // Redirect after successful login
+        router.push(redirectToReferrer);
+      } else {
+        throw new Error(res.message || "Login failed");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "An error occurred during login");
+    } finally {
+      setLoading(false); // Set loading to false when login is complete
     }
   };
-
-  useEffect(() => {
-    if (isError) {
-      toast.error((error as TError)?.data?.message);
-    }
-
-    if (isSuccess) {
-      toast.success("Login successful");
-      // window.location.reload();
-      router.push("/");
-    }
-  }, [isError, isSuccess, router, redirectToReferrer, error]);
 
   return (
     <>
       {isLoading && (
-        <div className="h-screen bg-black/10 inset-0 z-[999] fixed backdrop-blur-sm flex mx-auto justify-center">
+        <div className="h-screen bg-black/10 inset-0 z-[999] fixed backdrop-blur-sm flex justify-center items-center">
           <Spinner size="lg" />
         </div>
       )}
@@ -79,8 +85,8 @@ const LoginPage = () => {
             />
             <div className="flex justify-between">
               <ForgotPasswordModal />
-              <p className="text-right ">
-                Do Not have account?{" "}
+              <p className="text-right">
+                Don’t have an account?{" "}
                 <Link href="/register" className="text-blue-500">
                   Register
                 </Link>
@@ -90,7 +96,7 @@ const LoginPage = () => {
               variant="solid"
               className="w-full my-4"
               type="submit"
-              isLoading={isLoading} // Disable button during loading
+              isLoading={isLoading}
               disabled={isLoading} // Disable button during loading
             >
               Login

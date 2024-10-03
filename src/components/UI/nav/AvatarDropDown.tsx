@@ -19,8 +19,8 @@ const AvatarDropDown = () => {
   const pathName = usePathname();
   const router = useRouter();
   const handleLogout = () => {
-    dispatch(logout());
     removeCookies();
+    dispatch(logout());
     if (PROTECTED_ROUTE.some((route) => pathName.match(route))) {
       router.push("/");
     }
