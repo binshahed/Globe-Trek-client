@@ -1,6 +1,6 @@
 "use client"; // Ensure this component is a Client Component
 
-import React from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/src/store/hooks";
 import { setUser } from "@/src/store/features/auth/authSlice";
@@ -22,11 +22,10 @@ const LoginPage = () => {
   const redirectToReferrer = searchParams.get("redirect") || "/"; // Default redirect to home
 
   const dispatch = useAppDispatch();
-  const [isLoading, setLoading] = React.useState(false); // Track loading state
+  const [isLoading, setLoading] = useState(false);
 
   const handleSubmit = async (data: { email: string; password: string }) => {
-    setLoading(true); // Set loading to true when login starts
-
+    setLoading(true);
     try {
       const res = await loginUser(data); // Call loginUser service
 
@@ -35,9 +34,9 @@ const LoginPage = () => {
         // Assuming the JWT contains the user info
         console.log(res);
 
-        const verifyedToken = await verifyToken(res.data.accessToken); // Ensure verifyToken is defined
+        const decodedToken = await verifyToken(res.data.accessToken); // Ensure verifyToken is defined
 
-        dispatch(setUser({ user: verifyedToken, token: res.data.accessToken }));
+        dispatch(setUser({ user: decodedToken, token: res.data.accessToken }));
 
         toast.success("Login successful");
 

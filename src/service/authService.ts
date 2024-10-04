@@ -28,6 +28,29 @@ export const loginUser = async (userData: FieldValues) => {
     }
   }
 };
+export const registerUser = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/signup", userData);
+
+    if (data.success) {
+      // Set cookies for access and refresh tokens
+      cookies().set("accessToken", data?.data?.accessToken);
+      cookies().set("refreshToken", data?.data?.refreshToken);
+    }
+
+    return data;
+  } catch (error) {
+    if ((error as any).response) {
+      // Return server-side error message
+      throw new Error((error as any).response.data.message || "Login failed");
+    } else if ((error as any).request) {
+      // Network errors
+      throw new Error("Network error. Please try again later.");
+    } else {
+      throw new Error("Unexpected error occurred");
+    }
+  }
+};
 
 export const getUser = async () => {
   const accessToken = cookies().get("accessToken")?.value;

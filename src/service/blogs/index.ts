@@ -26,6 +26,7 @@ export const createBlog = async (data: any) => {
     });
 
     // Revalidate the cache for "blog" tag after successful creation
+
     revalidateTag("blog"); // Assuming "blog" is the cache tag
     return response.data;
   } catch (error: any) {

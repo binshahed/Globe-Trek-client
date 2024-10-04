@@ -11,7 +11,7 @@ import {
 import { CiEdit } from "react-icons/ci";
 import GlobeForm from "../form/GlobeForm";
 import GlobeInput from "../form/GlobeInput";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner"; // Assume you're using a toast notification system
 import { TUserData } from "@/src/types/TUser";
 import Image from "next/image";

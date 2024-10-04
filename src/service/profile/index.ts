@@ -1,4 +1,4 @@
-"use client";
+"use server";
 import { axiosInstance } from "@/src/lib/axiosInstance";
 
 export const getMe = async () => {

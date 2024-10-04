@@ -6,14 +6,15 @@ const userApi = baseApi.injectEndpoints({
       query: () => ({
         url: "/auth/me"
       }),
-      keepUnusedDataFor: 0
+      providesTags: ["user"]
     }),
     updateProfile: builder.mutation({
       query: (profile) => ({
         url: "/auth/me",
         method: "PATCH",
         body: profile
-      })
+      }),
+      invalidatesTags: ["user"]
     }),
     followToggle: builder.mutation({
       query: (data) => ({
@@ -21,7 +22,7 @@ const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data
       }),
-      invalidatesTags: ["blog"]
+      invalidatesTags: ["blog", "user"]
     })
   })
 });

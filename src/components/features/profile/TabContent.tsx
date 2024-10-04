@@ -1,6 +1,5 @@
 "use client";
 
-import { useUserQuery } from "@/src/store/features/user/userApi";
 import { Tab, Tabs } from "@nextui-org/react";
 
 import UpdateUserProfile from "../../modals/UpdateUserProfile";
@@ -9,11 +8,11 @@ import CreatePost from "./CreatePost";
 import BlogProfileCard from "../../cards/BlogProfileCard";
 import { useMyBlogQuery } from "@/src/store/features/blog/blogApi";
 import PostLoading from "../../UI/PoastLoading";
+import { useUserQuery } from "@/src/store/features/user/userApi";
 
 const TabContent = () => {
-  const { data, isLoading } = useUserQuery(undefined);
-
   const { data: blogData } = useMyBlogQuery(undefined);
+  const { data, isLoading } = useUserQuery(undefined);
 
   return (
     <>

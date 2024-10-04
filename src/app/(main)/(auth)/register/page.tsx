@@ -1,8 +1,7 @@
 "use client"; // Ensure this component is a Client Component
 
-import React, { useEffect } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useRegisterMutation } from "@/src/store/features/auth/authApi";
 import { useAppDispatch } from "@/src/store/hooks";
 import { setUser } from "@/src/store/features/auth/authSlice";
 import { toast } from "sonner";
@@ -12,22 +11,22 @@ import { registerSchema } from "@/src/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Link from "next/link";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Input } from "@nextui-org/input";
 import { verifyToken } from "@/src/utils/verifyToken";
-import { TError } from "@/src/types/global.Type";
+
+import { registerUser } from "@/src/service/authService";
 
 // Define form data type based on schema
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 const RegisterPage = () => {
+  const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectToReferrer = searchParams.get("redirect") || "/";
 
-  const [register, { isLoading, isError, error, isSuccess }] =
-    useRegisterMutation();
   const dispatch = useAppDispatch();
   // Set up the form using react-hook-form with zodResolver for validation
   const {
@@ -39,27 +38,33 @@ const RegisterPage = () => {
   });
 
   // Form submission handler
-  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
+    setLoading(true);
     try {
-      const res = await register(data).unwrap();
-      const user = await verifyToken(res.data.accessToken); // Ensure verifyToken is defined
-      dispatch(setUser({ user, token: res.data.accessToken }));
-    } catch (err) {
-      toast.error("register failed. Please check your credentials.");
+      const res = await registerUser(data); // Call loginUser service
+
+      // If login is successful
+      if (res.success) {
+        // Assuming the JWT contains the user info
+        console.log(res);
+
+        const decodedToken = await verifyToken(res.data.accessToken); // Ensure verifyToken is defined
+
+        dispatch(setUser({ user: decodedToken, token: res.data.accessToken }));
+
+        toast.success("Login successful");
+
+        // Redirect after successful login
+        router.push(redirectToReferrer);
+      } else {
+        throw new Error(res.message || "Login failed");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "An error occurred during login");
+    } finally {
+      setLoading(false); // Set loading to false when login is complete
     }
   };
-
-  useEffect(() => {
-    if (isError) {
-      toast.error((error as TError)?.data?.message);
-    }
-
-    if (isSuccess) {
-      toast.success("register successful");
-      // window.location.reload();
-      router.push("/");
-    }
-  }, [isError, isSuccess, router, redirectToReferrer, error]);
 
   return (
     <>
