@@ -19,6 +19,12 @@ const Layout = ({ children }: LayoutProps) => {
             >
               Change Password
             </Link>
+            <Link
+              href="/profile/verify-profile"
+              className="block text-default-800 hover:text-blue-500 mb-2"
+            >
+              Make Payment
+            </Link>
           </nav>
         </aside>
 

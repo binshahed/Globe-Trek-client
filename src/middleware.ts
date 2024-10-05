@@ -3,13 +3,13 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { getUser } from "./service/authService";
-import { TUserData } from "./types/TUser";
+
 
 const AuthRoutes = ["/login", "/login/reset-password", "/register"];
 
 const roleBasedRoutes: any = {
   user: [/^\/profile/],
-  admin: [/^\/admin/]
+  admin: [/^\/admin/, /^\/profile/]
 };
 
 // This function can be marked `async` if using `await` inside

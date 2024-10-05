@@ -83,7 +83,7 @@ export default function BlogPostHomeCard({ blog }: { blog: any }) {
                   </span>
                   *{"  "}
                   <span className="flex mx-1">
-                    <AiFillDislike /> {blog?.likes.length}
+                    <AiFillDislike /> {blog?.dislikes?.length}
                   </span>
                 </h5>
               </div>

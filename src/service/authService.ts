@@ -58,7 +58,7 @@ export const getUser = async () => {
 
   if (accessToken) {
     getDecodedToken = await jwtDecode(accessToken);
-    console.log("decoded token", getDecodedToken?.data);
+
 
     return getDecodedToken?.data;
   }

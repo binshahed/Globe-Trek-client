@@ -6,7 +6,7 @@ const userApi = baseApi.injectEndpoints({
       query: () => ({
         url: "/auth/me"
       }),
-      providesTags: ["user"]
+      providesTags: ["user", "blog", "payment"]
     }),
     updateProfile: builder.mutation({
       query: (profile) => ({
@@ -14,6 +14,7 @@ const userApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: profile
       }),
+
       invalidatesTags: ["user"]
     }),
     followToggle: builder.mutation({
