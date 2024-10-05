@@ -17,6 +17,8 @@ const BlogDetails = async ({ params }: { params: { blogId: string } }) => {
 
   const { data } = await res.json();
 
+  console.log(data);
+
   return (
     <Container className="my-20">
       <h5 className="mt-4 text-3xl font-semibold">{data?.title}</h5>
