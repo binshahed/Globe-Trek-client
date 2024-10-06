@@ -39,6 +39,13 @@ const blogApi = baseApi.injectEndpoints({
         method: "DELETE"
       }),
       invalidatesTags: ["blog"]
+    }),
+    getAllBlogs: builder.query({
+      query: () => ({
+        url: "/blog",
+        method: "GET"
+      }),
+      providesTags: ["blog"]
     })
   })
 });
@@ -48,5 +55,6 @@ export const {
   useMyBlogQuery,
   useDislikeBlogMutation,
   useUpdateBlogMutation,
-  useDeleteBlogMutation
+  useDeleteBlogMutation,
+  useGetAllBlogsQuery
 } = blogApi;

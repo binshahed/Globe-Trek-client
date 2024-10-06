@@ -24,6 +24,12 @@ const userApi = baseApi.injectEndpoints({
         body: data
       }),
       invalidatesTags: ["blog", "user"]
+    }),
+    getUsers: builder.query({
+      query: () => ({
+        url: "/auth/users"
+      }),
+      providesTags: ["user"]
     })
   })
 });
@@ -31,5 +37,6 @@ const userApi = baseApi.injectEndpoints({
 export const {
   useUserQuery,
   useUpdateProfileMutation,
-  useFollowToggleMutation
+  useFollowToggleMutation,
+  useGetUsersQuery
 } = userApi;

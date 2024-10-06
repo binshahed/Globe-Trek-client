@@ -1,6 +1,6 @@
 import Container from "@/src/components/UI/Container";
 import { getMe } from "@/src/service/profile";
-import PaymentForm from "./paymentForm";
+// import PaymentForm from "./paymentForm";
 
 const VerifyProfile = async () => {
   const user = await getMe();
@@ -22,7 +22,8 @@ const VerifyProfile = async () => {
 
   return (
     <Container>
-      <PaymentForm user={user} />
+      <h3>verify profile</h3>
+      {/* <PaymentForm user={user} /> */}
     </Container>
   );
 };

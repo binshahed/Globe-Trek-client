@@ -14,16 +14,22 @@ const Layout = ({ children }: LayoutProps) => {
         <aside className="bg-default-300 h-full rounded-lg w-64 p-6 shadow-md">
           <nav>
             <Link
-              href="/profile/change-password"
+              href="/admin"
               className="block text-default-800 hover:text-blue-500 mb-2"
             >
-              Change Password
+              Dashboard
             </Link>
             <Link
-              href="/profile/verify-profile"
+              href="/admin/manage-users"
               className="block text-default-800 hover:text-blue-500 mb-2"
             >
-              Make Payment
+              Users
+            </Link>
+            <Link
+              href="/admin/payment-details"
+              className="block text-default-800 hover:text-blue-500 mb-2"
+            >
+              Payments
             </Link>
           </nav>
         </aside>

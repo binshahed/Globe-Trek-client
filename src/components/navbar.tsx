@@ -23,15 +23,7 @@ import AvatarDropDown from "./UI/nav/AvatarDropDown";
 import { Link } from "@nextui-org/link";
 
 export const Navbar = () => {
-  const [user, setUser] = useState(null);
-  console.log("nav user", user);
-  
-  const currentUser = useAppSelector(useCurrentUser);
-
-  useEffect(() => {
-    // Synchronize state with redux store
-    setUser(currentUser as any);
-  }, [currentUser]);
+  const user = useAppSelector(useCurrentUser);
 
   return (
     <NextUINavbar
