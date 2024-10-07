@@ -96,7 +96,7 @@ const CreatePost = () => {
         featuredImage: uploadedImageUrl // Set uploaded image URL
       };
 
-      console.log(postData);
+  
 
       // 3. Submit the blog data to the backend
       const response = await createBlog(postData);

@@ -4,7 +4,7 @@
 import { User } from "@nextui-org/user";
 
 const UserIcon = ({ user }: { user: any }) => {
-  console.log("user photo", user?.imageUrl);
+
   return (
     <User
       as="button"

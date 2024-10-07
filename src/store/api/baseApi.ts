@@ -10,6 +10,8 @@ import {
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import envConfig from "@/src/config";
+import { toast } from "sonner";
+import { TError } from "@/src/types/global.Type";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: envConfig.baseApi,
@@ -34,8 +36,9 @@ const BaseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error) {
-    console.log(result.error);
-    // message.error((result?.error as any)?.data?.message as string);
+    const error = result?.error;
+    console.log(error);
+    // toast.error((error as TError)?.data?.message);
   }
 
   // if token is expired

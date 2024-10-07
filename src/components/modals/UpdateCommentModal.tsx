@@ -26,7 +26,7 @@ export default function UpdateCommentModal({ data }: { data: any }) {
       }).unwrap(); // Unwrap the promise to get the actual response
 
       toast.success("Comment updated successfully!"); // Show success message
-      console.log("Updated Comment Response:", response); // Log the successful response
+
       onOpenChange(); // Close the modal after successful update
     } catch (err) {
       console.error("Error updating comment:", err);

@@ -18,8 +18,7 @@ type MonthlyData = {
 
 const PaymentList = () => {
   const { data: payments, isLoading } = useGetAllPaymentsQuery(undefined);
-  // Group transactions by month and sum the amounts
-  console.log(payments?.data);
+
 
   const paymentData = payments?.data || [];
 

@@ -14,7 +14,7 @@ const roleBasedRoutes: any = {
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  console.log(request);
+
 
   const { pathname } = request.nextUrl;
 
@@ -40,7 +40,6 @@ export async function middleware(request: NextRequest) {
 
     // Check if the current pathname matches any routes for the user's role
     if (routes.some((route: any) => pathname.match(route))) {
-      console.log("test", user);
       return NextResponse.next();
     }
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody, Image, Button, Avatar } from "@nextui-org/react";
+import { Card, CardBody, Image, Button, Avatar, Chip } from "@nextui-org/react";
 import Link from "next/link";
 import moment from "moment";
 import { useCurrentUser } from "@/src/store/features/auth/authSlice";
@@ -26,8 +26,6 @@ export default function BlogPostHomeCard({ blog }: { blog: any }) {
       console.error("Error following user:", error);
     }
   };
-
-  console.log("author", user?.data?._id === blog?.author?._id);
 
   return (
     <Card
@@ -77,7 +75,16 @@ export default function BlogPostHomeCard({ blog }: { blog: any }) {
                   )}
                 </h4>
                 <h5 className="text-small tracking-tight text-default-400 flex">
-                  {moment(blog?.createdAt).calendar()} *{"  "}
+                  {moment(blog?.createdAt).calendar()} {"  "} *{"  "}
+                  <span>{blog?.category?.name}</span> {"  "} *{"  "}
+                  <span className="mx-3">
+                    {blog?.subsCription === "free" ? (
+                      <Chip color="primary">{blog?.subsCription}</Chip>
+                    ) : (
+                      <Chip color="danger">{blog?.subsCription}</Chip>
+                    )}
+                  </span>{" "}
+                  {"  "} *{"  "}
                   <span className="flex mx-1">
                     <AiFillLike /> {blog?.likes.length}
                   </span>

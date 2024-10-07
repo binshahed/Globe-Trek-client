@@ -32,7 +32,6 @@ const LoginPage = () => {
       // If login is successful
       if (res.success) {
         // Assuming the JWT contains the user info
-        console.log(res);
 
         const decodedToken = await verifyToken(res.data.accessToken); // Ensure verifyToken is defined
 

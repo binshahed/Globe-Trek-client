@@ -19,7 +19,7 @@ type MonthlyData = {
 
 const BlogListGraph = () => {
   const { data: posts, isLoading } = useGetAllBlogsQuery(undefined);
-  console.log(posts?.data);
+
 
   const postData = posts?.data || [];
 

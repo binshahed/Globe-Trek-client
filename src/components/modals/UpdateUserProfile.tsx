@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 
 import {
@@ -78,7 +79,6 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
       // If an image file is selected, upload it
       if (imageFile) {
         imageUrl = await uploadImageToImageBB(imageFile);
-        console.log("Image uploaded successfully:", imageUrl);
       }
 
       // Detect changes by comparing the form data with the initial user data
@@ -101,12 +101,9 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
         return;
       }
 
-      console.log("Updated Fields:", updatedFields);
-
       // Call the API to update the profile with only changed fields
       const response = await updateProfile(updatedFields).unwrap();
       if (response.success) {
-        console.log(response);
         dispatch(
           setUser({
             user: { ...currentUser, data: response?.data },
@@ -118,7 +115,6 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
       } else {
         toast.error(response?.message);
       }
-      console.log("API Response:", response);
     } catch (error) {
       console.error("Error from API:", error);
       toast.error("Error submitting the form.");
@@ -133,7 +129,7 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
         isIconOnly
         color="default"
         aria-label="Edit Profile"
-        className="min-w-7 w-7 h-7 mt-2"
+        className="min-w-7 w-7 h-7 mt-2 ml-2"
       >
         <CiEdit className="w-5 h-5" />
       </Button>

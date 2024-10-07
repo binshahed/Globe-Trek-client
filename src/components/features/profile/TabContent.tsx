@@ -17,7 +17,6 @@ const TabContent = () => {
 
   return (
     <>
-      <UpdateUserProfile user={data} />
       <Tabs variant="underlined" aria-label="Tabs variants">
         <Tab key="post" title="Posts">
           <CreateBlogModal />

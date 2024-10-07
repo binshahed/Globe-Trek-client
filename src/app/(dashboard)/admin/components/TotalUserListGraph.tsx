@@ -19,7 +19,7 @@ type MonthlyData = {
 
 const TotalUserListGraph = () => {
   const { data: users, isLoading } = useGetUsersQuery(undefined);
-  console.log(users?.data);
+
 
   const userData = users?.data || [];
 

@@ -24,10 +24,9 @@ export default function CommentCard({
     toast.success("comment deleted successfully");
   }
 
-  console.log(comment);
+
   const isOwner = comment?.user?._id === user?.data?._id;
 
-  console.log(isOwner);
 
   return (
     <Card className="max-w-full my-5">
