@@ -9,33 +9,27 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <Container className="my-20">
-      <div className="flex">
+      <div className="md:flex mx-auto justify-center w-full">
         {/* Sidebar */}
-        <aside className="bg-default-300 h-full rounded-lg w-64 p-6 shadow-md">
+        <aside className="bg-default-300 h-full w-full rounded-lg md:w-64 p-6 shadow-md md:mt-20">
           <nav>
             <Link
-              href="/admin"
+              href="/user"
               className="block text-default-800 hover:text-blue-500 mb-2"
             >
-              Dashboard
+              Manage Blog
             </Link>
             <Link
-              href="/admin/manage-users"
+              href="/user/follow"
               className="block text-default-800 hover:text-blue-500 mb-2"
             >
-              Users
-            </Link>
-            <Link
-              href="/admin/payment-details"
-              className="block text-default-800 hover:text-blue-500 mb-2"
-            >
-              Payments
+              Followers/Following
             </Link>
           </nav>
         </aside>
 
         {/* Main Content */}
-        <section className="flex-1 ml-4 p-6">{children}</section>
+        <section className="flex-1 md:ml-4 md:p-6">{children}</section>
       </div>
     </Container>
   );

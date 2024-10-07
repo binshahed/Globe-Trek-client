@@ -1,29 +1,12 @@
 import Container from "@/src/components/UI/Container";
-import { getMe } from "@/src/service/profile";
-// import PaymentForm from "./paymentForm";
+
+import PaymentForm from "./paymentForm";
 
 const VerifyProfile = async () => {
-  const user = await getMe();
-
-  //   const handleSubmit = async (event) => {
-  //     // event.preventDefault();
-  //     // setIsSubmitting(true);
-  //     // try {
-  //     //   // Handle form submission logic here
-  //     //   console.log("Form submitted!");
-  //     // } catch (err) {
-  //     //   console.error(err);
-  //     // } finally {
-  //     //   setIsSubmitting(false);
-  //     // }
-  //   };
-
-  //   console.log(user);
-
   return (
     <Container>
-      <h3>verify profile</h3>
-      {/* <PaymentForm user={user} /> */}
+      <h3 className="mb-5 text-center font-bold text-md">Verify Profile</h3>
+      <PaymentForm />
     </Container>
   );
 };

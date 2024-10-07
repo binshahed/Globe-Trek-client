@@ -1,15 +1,19 @@
 "use client";
 import GlobeForm from "@/src/components/form/GlobeForm";
 import GlobeInput from "@/src/components/form/GlobeInput";
+import { useCurrentUser } from "@/src/store/features/auth/authSlice";
 import {
   useGetPaymentDetailsQuery,
   useMakePaymentMutation
 } from "@/src/store/features/payment/paymentApi";
-import { TUser } from "@/src/types/TUser";
 import { Button } from "@nextui-org/button";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-const PaymentForm = ({ user }: { user: TUser }) => {
+const PaymentForm = () => {
+  const res = useSelector(useCurrentUser);
+
+  const user = res?.data;
   const [makePayment, { data, isLoading }] = useMakePaymentMutation();
 
   const { data: paymentData } = useGetPaymentDetailsQuery(undefined);

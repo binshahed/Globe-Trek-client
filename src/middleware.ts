@@ -8,7 +8,7 @@ import { getUser } from "./service/authService";
 const AuthRoutes = ["/login", "/login/reset-password", "/register"];
 
 const roleBasedRoutes: any = {
-  user: [/^\/profile/],
+  user: [/^\/profile/, /^\/user/],
   admin: [/^\/admin/, /^\/profile/]
 };
 
@@ -45,8 +45,6 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  
-  
   // If role doesn't match, redirect to the home page or an error page
   return NextResponse.redirect(new URL("/", request.url));
 }
@@ -57,6 +55,9 @@ export const config = {
     "/profile",
     "/profile/:page*",
     "/admin",
+    "/admin/:page*",
+    "/user",
+    "/user/:page*",
     "/login",
     "/login/reset-password",
     "/register",

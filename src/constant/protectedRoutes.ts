@@ -2,7 +2,11 @@ export const PROTECTED_ROUTE = [
   "/profile",
   "/profile/:page*",
   "/admin",
+  "/admin/:page*",
+  "/user",
+  "/user/:page*",
   "/login",
-  "/login/:page*",
-  "/register"
+  "/login/reset-password",
+  "/register",
+  "/about"
 ];

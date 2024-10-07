@@ -30,6 +30,14 @@ const userApi = baseApi.injectEndpoints({
         url: "/auth/users"
       }),
       providesTags: ["user"]
+    }),
+    changeRole: builder.mutation({
+      query: (data) => ({
+        url: "/auth/change-role",
+        method: "PATCH",
+        body: data
+      }),
+      invalidatesTags: ["user"]
     })
   })
 });
@@ -38,5 +46,6 @@ export const {
   useUserQuery,
   useUpdateProfileMutation,
   useFollowToggleMutation,
-  useGetUsersQuery
+  useGetUsersQuery,
+  useChangeRoleMutation
 } = userApi;

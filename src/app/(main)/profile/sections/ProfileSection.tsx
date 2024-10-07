@@ -10,7 +10,7 @@ const ProfileSection = () => {
 
   const user = data?.data;
   return (
-    <div className="flex">
+    <div className="md:flex">
       <UserIcon user={user} />
       <div className="ml-8 mt-5">
         <h5 className="text-3xl font-bold flex">

@@ -53,6 +53,11 @@ const AvatarDropDown = () => {
             Profile
           </Link>
         </DropdownItem>
+        <DropdownItem key="crate_post">
+          <Link href={`/${user?.data?.role}`} className="block">
+            Dashboard
+          </Link>
+        </DropdownItem>
         <DropdownItem key="claim_request">
           <Link href="/profile/change-password" className="block">
             Settings

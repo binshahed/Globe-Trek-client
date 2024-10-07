@@ -17,7 +17,7 @@ import { ThemeSwitch } from "@/src/components/theme-switch";
 import { Logo } from "@/src/components/icons";
 import { useAppSelector } from "../store/hooks";
 import { useCurrentUser } from "../store/features/auth/authSlice";
-import { useEffect, useState } from "react";
+
 import { TUserData } from "../types/TUser";
 import AvatarDropDown from "./UI/nav/AvatarDropDown";
 import { Link } from "@nextui-org/link";
@@ -61,6 +61,7 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
+
         {!(user as TUserData | null)?.data?.role && (
           <NavbarItem className="hidden md:flex">
             <Button

@@ -11,11 +11,15 @@ import {
   TableRow
 } from "@nextui-org/table";
 import moment from "moment";
+import { toast } from "sonner";
 
 const PaymentDetails = () => {
   const { data, isLoading } = useGetAllPaymentsQuery(undefined);
   const payments = data?.data || [];
-  console.log(payments);
+  if (!payments?.length) {
+    toast.info("No payments found");
+    return null;
+  }
 
   return (
     <div>
@@ -26,6 +30,7 @@ const PaymentDetails = () => {
         <Table isStriped aria-label="Example static collection table">
           <TableHeader>
             <TableColumn>Name</TableColumn>
+            <TableColumn>Email</TableColumn>
             <TableColumn>Date</TableColumn>
             <TableColumn>transaction Id</TableColumn>
             <TableColumn>Amount</TableColumn>
@@ -34,6 +39,7 @@ const PaymentDetails = () => {
             {payments?.map((payment: any) => (
               <TableRow key={payment?._id}>
                 <TableCell>{payment?.user?.name}</TableCell>
+                <TableCell>{payment?.user?.email}</TableCell>
                 <TableCell>
                   {moment(payment?.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
                 </TableCell>

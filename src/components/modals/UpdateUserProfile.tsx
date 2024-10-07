@@ -17,15 +17,26 @@ import { TUserData } from "@/src/types/TUser";
 import Image from "next/image";
 import { useUpdateProfileMutation } from "@/src/store/features/user/userApi";
 import envConfig from "@/src/config";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setUser,
+  useCurrentToken,
+  useCurrentUser
+} from "@/src/store/features/auth/authSlice";
 
 export default function UpdateUserProfile({ user }: { user: TUserData }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const currentUser = useSelector(useCurrentUser);
+
+  const currentToken = useSelector(useCurrentToken);
   const [updateProfile] = useUpdateProfileMutation();
   const [imageFile, setImageFile] = useState<File | null>(null); // Store the selected image file
   const [imagePreview, setImagePreview] = useState<string | null>(
     user?.data?.photoUrl || null
   ); // Show current image or uploaded preview
   const [isSubmitting, setIsSubmitting] = useState(false); // Handle submit state
+
+  const dispatch = useDispatch();
 
   const handleImageChange = (files: FileList | null) => {
     if (!files || files.length === 0) return;
@@ -62,7 +73,7 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
   const handleSubmit = async (formData: any) => {
     try {
       setIsSubmitting(true);
-      let imageUrl = imagePreview; // Use current image URL unless new image is uploaded
+      let imageUrl = user?.data?.photoUrl; // Default to current image URL
 
       // If an image file is selected, upload it
       if (imageFile) {
@@ -78,7 +89,11 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
         updatedFields.phone = formData.phone;
       if (formData.address !== user?.data?.address)
         updatedFields.address = formData.address;
-      if (imageUrl !== user?.data?.photoUrl) updatedFields.photoUrl = imageUrl;
+
+      // Update photoUrl only if a new image was uploaded
+      if (imageFile && imageUrl !== user?.data?.photoUrl) {
+        updatedFields.photoUrl = imageUrl;
+      }
 
       if (Object.keys(updatedFields).length === 0) {
         toast.info("No changes detected");
@@ -86,24 +101,31 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
         return;
       }
 
-      console.log("Updated Fields:", updatedFields); // Log the payload being sent
+      console.log("Updated Fields:", updatedFields);
 
       // Call the API to update the profile with only changed fields
       const response = await updateProfile(updatedFields).unwrap();
       if (response.success) {
+        console.log(response);
+        dispatch(
+          setUser({
+            user: { ...currentUser, data: response?.data },
+            token: currentToken
+          })
+        );
+        onClose();
         toast.success("Profile updated successfully");
       } else {
         toast.error(response?.message);
       }
-      console.log("API Response:", response); // Log the API response
+      console.log("API Response:", response);
     } catch (error) {
-      console.error("Error from API:", error); // Log any errors from the API
+      console.error("Error from API:", error);
       toast.error("Error submitting the form.");
     } finally {
       setIsSubmitting(false);
     }
   };
-
   return (
     <>
       <Button

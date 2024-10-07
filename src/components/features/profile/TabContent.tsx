@@ -9,6 +9,7 @@ import BlogProfileCard from "../../cards/BlogProfileCard";
 import { useMyBlogQuery } from "@/src/store/features/blog/blogApi";
 import PostLoading from "../../UI/PoastLoading";
 import { useUserQuery } from "@/src/store/features/user/userApi";
+import CreateBlogModal from "../../modals/CreateBlogModal";
 
 const TabContent = () => {
   const { data: blogData } = useMyBlogQuery(undefined);
@@ -19,7 +20,7 @@ const TabContent = () => {
       <UpdateUserProfile user={data} />
       <Tabs variant="underlined" aria-label="Tabs variants">
         <Tab key="post" title="Posts">
-          <CreatePost />
+          <CreateBlogModal />
           {isLoading ? (
             <PostLoading />
           ) : (
