@@ -31,6 +31,12 @@ const Layout = ({ children }: LayoutProps) => {
             >
               Payments
             </Link>
+            <Link
+              href="/admin/categories"
+              className="block text-default-800 hover:text-blue-500 mb-2"
+            >
+              Categories
+            </Link>
           </nav>
         </aside>
 

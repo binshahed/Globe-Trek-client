@@ -1,3 +1,5 @@
+"use client";
+
 import { baseApi } from "../../api/baseApi";
 
 const categoryApi = baseApi.injectEndpoints({
