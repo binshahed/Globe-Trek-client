@@ -7,6 +7,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/src/config/site";
 import { fontSans } from "@/src/config/fonts";
 import { Navbar } from "@/src/components/navbar";
+import Footer from "../components/UI/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -43,7 +44,8 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main>{children}</main>
+            <main className="min-h-screen">{children}</main>
+            <Footer />
           </div>
         </Providers>
       </body>

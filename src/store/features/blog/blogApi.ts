@@ -46,6 +46,15 @@ const blogApi = baseApi.injectEndpoints({
         method: "GET"
       }),
       providesTags: ["blog"]
+    }),
+    getAllBlog: builder.query({
+      query: (query) => {
+        const { searchTerm = "" } = query;
+        return {
+          url: `/blog?searchTerm=${searchTerm}`,
+          method: "GET"
+        };
+      }
     })
   })
 });
@@ -56,5 +65,6 @@ export const {
   useDislikeBlogMutation,
   useUpdateBlogMutation,
   useDeleteBlogMutation,
-  useGetAllBlogsQuery
+  useGetAllBlogsQuery,
+  useGetAllBlogQuery
 } = blogApi;

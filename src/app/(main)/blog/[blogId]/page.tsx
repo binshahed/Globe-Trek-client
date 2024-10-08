@@ -1,42 +1,22 @@
 import Container from "@/src/components/UI/Container";
 import envConfig from "@/src/config";
 import moment from "moment";
-import React, { useRef } from "react";
+import React from "react";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import Image from "next/image";
 import CommentSection from "@/src/components/features/blogDetails/CommentSection";
 import PayNowModal from "@/src/components/modals/PayNowModal";
-import jsPDF from "jspdf"; // Import jsPDF
-import html2canvas from "html2canvas"; // Import html2canvas
 
 export const revalidate = 0;
 
 const BlogDetails = async ({ params }: { params: { blogId: string } }) => {
   const res = await fetch(`${envConfig.baseApi}/blog/${params?.blogId}`, {
-    cache: "no-store", // Ensures fresh data is fetched each time
+    cache: "no-store" // Ensures fresh data is fetched each time
   });
 
   const { data } = await res.json();
-
-  const contentRef = useRef<HTMLDivElement>(null); // Reference for the blog content
-
-  // Function to handle PDF download
-  const handleDownloadPDF = async () => {
-    const input = contentRef.current;
-    if (input) {
-      const canvas = await html2canvas(input);
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${data?.title}.pdf`);
-    }
-  };
 
   return (
     <Container className="my-20">
@@ -81,23 +61,12 @@ const BlogDetails = async ({ params }: { params: { blogId: string } }) => {
       </div>
 
       {/* Blog content section with ref for PDF generation */}
-      <div ref={contentRef}>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data.content,
-          }}
-        />
-      </div>
 
-      {/* Download PDF button */}
-      <div className="mt-5">
-        <button
-          onClick={handleDownloadPDF}
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700"
-        >
-          Download PDF
-        </button>
-      </div>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: data.content
+        }}
+      />
 
       <CommentSection blogId={params?.blogId} blogData={data} />
     </Container>

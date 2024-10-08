@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { getUser } from "./service/authService";
 
-
 const AuthRoutes = ["/login", "/login/reset-password", "/register"];
 
 const roleBasedRoutes: any = {
@@ -14,8 +13,6 @@ const roleBasedRoutes: any = {
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-
-
   const { pathname } = request.nextUrl;
 
   // Fetch user data
@@ -59,7 +56,6 @@ export const config = {
     "/user/:page*",
     "/login",
     "/login/reset-password",
-    "/register",
-    "/about"
+    "/register"
   ]
 };

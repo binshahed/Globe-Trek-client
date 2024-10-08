@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import BlogPostHomeCard from "../../cards/BlogPostHomeCard";
 import axios from "axios";
 import envConfig from "@/src/config";
+import SearchSection from "./SearchSection";
 
 type Blog = {
   _id: string;
@@ -72,6 +73,7 @@ const BlogSection = () => {
 
   return (
     <div>
+      <SearchSection />
       {blogs?.map((blog, index) => {
         const isLastBlog = index === blogs.length - 1;
         return (

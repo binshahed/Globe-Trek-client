@@ -14,13 +14,14 @@ import NextLink from "next/link";
 import clsx from "clsx";
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
-import { Logo } from "@/src/components/icons";
+
 import { useAppSelector } from "../store/hooks";
 import { useCurrentUser } from "../store/features/auth/authSlice";
 
 import { TUserData } from "../types/TUser";
 import AvatarDropDown from "./UI/nav/AvatarDropDown";
 import { Link } from "@nextui-org/link";
+import Image from "next/image";
 
 export const Navbar = () => {
   const user = useAppSelector(useCurrentUser);
@@ -34,8 +35,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
+            <Image src="/logo1.png" alt="logo" width={120} height={50} />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
