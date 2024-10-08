@@ -22,7 +22,7 @@ export default function PayNowModal({ blogData }: { blogData: any }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user?.data?.email) {
+    if (!user?.data?.email && blogData?.subsCription === "premium") {
       onOpen();
     }
 
