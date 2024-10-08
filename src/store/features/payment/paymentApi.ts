@@ -12,9 +12,10 @@ const paymentApi = baseApi.injectEndpoints({
     }),
     getPaymentDetails: builder.query({
       query: () => ({
-        url: "/payment/getPaymentDetails",
+        url: "/payment/getPaymentDetails?exclude=cash",
         method: "GET"
       }),
+
       providesTags: ["payment"]
     }),
     getAllPayments: builder.query({
