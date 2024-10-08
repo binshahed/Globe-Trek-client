@@ -2,8 +2,7 @@
 
 import { Tab, Tabs } from "@nextui-org/react";
 
-import UpdateUserProfile from "../../modals/UpdateUserProfile";
-import CreatePost from "./CreatePost";
+
 
 import BlogProfileCard from "../../cards/BlogProfileCard";
 import { useMyBlogQuery } from "@/src/store/features/blog/blogApi";

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 
 import {
@@ -15,7 +16,7 @@ import { useSelector } from "react-redux";
 import { useCurrentUser } from "@/src/store/features/auth/authSlice";
 
 export default function PayNowModal({ blogData }: { blogData: any }) {
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const user = useSelector(useCurrentUser);
   const { data, isLoading } = useGetPaymentDetailsQuery(undefined);
   const router = useRouter();

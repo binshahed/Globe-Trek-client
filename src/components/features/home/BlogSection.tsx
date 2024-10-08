@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import BlogPostHomeCard from "../../cards/BlogPostHomeCard";
 import axios from "axios";
 import envConfig from "@/src/config";
+import SearchSection from "./SearchSection";
 
 type Blog = {
   _id: string;
@@ -27,7 +28,7 @@ const BlogSection = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${envConfig.baseApi}/blog`, {
-        params: { limit: 1, page }
+        params: { limit: 5, page }
       });
       const data = res.data;
 
@@ -72,6 +73,11 @@ const BlogSection = () => {
 
   return (
     <div>
+      <div className="text-center mb-10">
+        <h5 className="text-lg italic">Latest Insights</h5>
+        <h2 className="text-6xl font-semibold">Latest Blogs</h2>
+      </div>
+      <SearchSection />
       {blogs?.map((blog, index) => {
         const isLastBlog = index === blogs.length - 1;
         return (

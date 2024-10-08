@@ -10,8 +10,6 @@ import {
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import envConfig from "@/src/config";
-import { toast } from "sonner";
-import { TError } from "@/src/types/global.Type";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: envConfig.baseApi,

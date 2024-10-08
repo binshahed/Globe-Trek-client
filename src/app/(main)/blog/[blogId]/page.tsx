@@ -8,6 +8,7 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import Image from "next/image";
 import CommentSection from "@/src/components/features/blogDetails/CommentSection";
 import PayNowModal from "@/src/components/modals/PayNowModal";
+import DownloadPdf from "./DownloadPdf";
 
 export const revalidate = 0;
 
@@ -48,6 +49,7 @@ const BlogDetails = async ({ params }: { params: { blogId: string } }) => {
             {data?.dislikes.length}
           </span>
         </div>
+        <DownloadPdf blogData={data} />
       </div>
 
       <div className="w-full h-60 sm:h-80 lg:h-96 relative rounded-lg overflow-hidden shadow-lg">
