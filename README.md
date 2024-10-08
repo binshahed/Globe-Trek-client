@@ -1,53 +1,71 @@
-# Next.js & NextUI Template
+#  [Glove Track](https://globe-trek-client.vercel.app/)
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+## Introduction
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+Glove Track is a comprehensive platform for travel enthusiasts, offering travel tips, destination guides, and interactive features for users to share their experiences. With user authentication and premium content access, Glove Track provides a community-driven space where users can explore, connect, and contribute to an ever-growing library of travel stories and tips.
 
-## Technologies Used
+## Features
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- User Authentication & Profile Management
+- Create and Share Travel Posts
+- Upvote & Downvote System
+- Commenting on Posts
+- Payment Gateway Integration for Premium Content
+- Advanced Search and Filter Options
+- Following System
+- Responsive Design
+- Rich Text Editor for Posts
+- Social Features (Upvotes, Following, Comments)
+- Infinite Scroll News Feed
 
-## How to Use
+## Technology Stack
 
-### Use the template with create-next-app
+- **Next.js**
+- **Tailwind CSS**
+- **Redux Toolkit & RTK Query**
+- **Next UI**
+- **Axios**
+- **Aamarpay or Stripe Payment Gateway**
 
-To create a new project based on this template using `create-next-app`, run the following command:
+## Installation Guideline
+
+Instructions on how to install, configure, and run the project locally.
+
+### Prerequisites
+
+Make sure you have the following software installed on your machine:
+
+* Git
+* Node.js (v20.9.0 recommended)
+* npm or yarn
+
+### Installation Steps
+
+1. First, clone the repository using the following command:
 
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+https://github.com/binshahed/Globe-Trek-server.git
 ```
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
+```
+cd Globe-Trek-client
 ```
 
-### Run the development server
-
-```bash
-npm run dev
+```
+yarn add
 ```
 
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
+.env
+```
+NEXT_PUBLIC_VASE_API=http:''
+NEXT_PUBLIC_VASE_URL= ''
+NEXT_PUBLIC_IMAGEBB=''
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+```
+yarn dev
+```
 
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+```
+http://localhost:3000/
+```

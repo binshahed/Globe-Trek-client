@@ -9,9 +9,9 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <Container className="my-20">
-      <div className="flex">
+      <div className="md:flex mx-auto justify-center w-full">
         {/* Sidebar */}
-        <aside className="bg-default-300 h-full rounded-lg w-64 p-6 shadow-md">
+        <aside className="bg-default-300 h-full w-full rounded-lg md:w-64 p-6 shadow-md md:mt-20">
           <nav>
             <Link
               href="/profile/change-password"

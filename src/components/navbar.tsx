@@ -88,6 +88,11 @@ export const Navbar = () => {
 
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
+          {(user as TUserData | null)?.data?.role && (
+            <NavbarMenuItem className="mt-4">
+              <AvatarDropDown />
+            </NavbarMenuItem>
+          )}
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <NextLink href="#" color={index === 2 ? "primary" : "foreground"}>
@@ -96,6 +101,11 @@ export const Navbar = () => {
             </NavbarMenuItem>
           ))}
         </div>
+        {(user as TUserData | null)?.data?.role && (
+          <NavbarItem className="hidden lg:flex">
+            <AvatarDropDown />
+          </NavbarItem>
+        )}
       </NavbarMenu>
     </NextUINavbar>
   );
