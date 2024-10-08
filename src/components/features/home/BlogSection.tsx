@@ -73,6 +73,13 @@ const BlogSection = () => {
 
   return (
     <div>
+      <div className="text-center mt-28 mb-14">
+        <h5 className="text-lg italic">Latest Blogs</h5>
+        <h2 className="text-6xl font-semibold">Explore the World with Us</h2>
+        <p className="text-xl text-gray-600 mt-2">
+          Your Go-To Source for Essential Travel Tips and Inspiration
+        </p>
+      </div>
       <SearchSection />
       {blogs?.map((blog, index) => {
         const isLastBlog = index === blogs.length - 1;

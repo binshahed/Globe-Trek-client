@@ -13,12 +13,14 @@ export default async function HomePage() {
   // const blogs = data?.data;
 
   return (
-    <section className="mt-[-70px]">
-      <BannerSection />
-      <TravelFeatures />
-      <Container className="my-8">
-        <BlogSection />
-      </Container>
-    </section>
+    <div>
+      <section className="mt-[-70px]">
+        <BannerSection />
+        <TravelFeatures />
+        <Container className="my-8">
+          <BlogSection />
+        </Container>
+      </section>
+    </div>
   );
 }
