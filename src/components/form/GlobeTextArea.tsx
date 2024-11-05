@@ -8,6 +8,7 @@ interface TInputProps {
   type?: string;
   label?: string;
   name: string;
+  defaultValue?: string;
   className?: string;
   errorMessage?: string;
   placeholder?: string;
@@ -16,7 +17,7 @@ interface TInputProps {
 const GlobeTextArea = ({
   variant = "bordered",
   required = false,
-
+  defaultValue,
   label,
   name,
   placeholder,
@@ -32,6 +33,7 @@ const GlobeTextArea = ({
       {...register(name)}
       label={label}
       variant={variant}
+      defaultValue={defaultValue}
       placeholder={placeholder}
       disableAnimation
       disableAutosize

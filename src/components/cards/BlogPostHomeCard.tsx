@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, Image, Button, Avatar, Chip } from "@nextui-org/react";
 import Link from "next/link";
@@ -56,7 +58,13 @@ export default function BlogPostHomeCard({ blog }: { blog: any }) {
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className=" font-semibold leading-none text-default-600">
-                  <span className="mr-5 text-md"> {blog?.author?.name}</span>
+                  <Link
+                    href={`/author/${blog?.author?._id}`}
+                    className="mr-5 text-md"
+                  >
+                    {" "}
+                    {blog?.author?.name}
+                  </Link>
                   {user && user?.data?._id !== blog?.author?._id && (
                     <Button
                       className={

@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useCallback } from "react";
 import BlogPostHomeCard from "../../cards/BlogPostHomeCard";
 import axios from "axios";
 import envConfig from "@/src/config";
 import SearchSection from "./SearchSection";
+import useInfiniteScroll from "react-infinite-scroll-hook";
 
 type Blog = {
   _id: string;
@@ -21,14 +22,13 @@ const BlogSection = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const observer = useRef<IntersectionObserver | null>(null);
 
   // Fetch blogs using Axios
-  const fetchBlogs = async () => {
+  const fetchBlogs = useCallback(async () => {
     setLoading(true);
     try {
       const res = await axios.get(`${envConfig.baseApi}/blog`, {
-        params: { limit: 5, page }
+        params: { limit: 5, page } // Increased limit
       });
       const data = res.data;
 
@@ -42,54 +42,32 @@ const BlogSection = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page]);
 
   useEffect(() => {
     fetchBlogs();
-  }, [page]);
+  }, [fetchBlogs]);
 
-  const lastBlogRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (loading || !hasMore) return;
-
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      if (entries[0].isIntersecting) {
-        setPage((prev) => prev + 1);
-      }
-    };
-
-    observer.current = new IntersectionObserver(callback);
-    if (lastBlogRef.current) {
-      observer.current.observe(lastBlogRef.current);
-    }
-
-    return () => {
-      if (lastBlogRef.current && observer.current) {
-        observer.current.unobserve(lastBlogRef.current);
-      }
-    };
-  }, [loading, hasMore]);
+  // Infinite scroll hook
+  const [infiniteRef] = useInfiniteScroll({
+    loading,
+    hasNextPage: hasMore,
+    onLoadMore: () => setPage((prev) => prev + 1),
+    disabled: loading || !hasMore
+  });
 
   return (
-    <div>
+    <div ref={infiniteRef}>
       <div className="text-center mb-10">
         <h5 className="text-lg italic">Latest Insights</h5>
         <h2 className="text-6xl font-semibold">Latest Blogs</h2>
       </div>
       <SearchSection />
-      {blogs?.map((blog, index) => {
-        const isLastBlog = index === blogs.length - 1;
-        return (
-          <div
-            className="mt-10"
-            ref={isLastBlog ? lastBlogRef : null}
-            key={blog?._id}
-          >
-            <BlogPostHomeCard blog={blog} />
-          </div>
-        );
-      })}
+      {blogs?.map((blog) => (
+        <div className="mt-10" key={blog?._id}>
+          <BlogPostHomeCard blog={blog} />
+        </div>
+      ))}
       {loading && <p className="text-center">Loading more blogs...</p>}
       {!hasMore && <p className="text-center">No more data found</p>}
     </div>

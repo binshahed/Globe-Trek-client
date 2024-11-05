@@ -24,6 +24,7 @@ import {
   useCurrentToken,
   useCurrentUser
 } from "@/src/store/features/auth/authSlice";
+import GlobeTextArea from "../form/GlobeTextArea";
 
 export default function UpdateUserProfile({ user }: { user: TUserData }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -89,6 +90,9 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
         updatedFields.phone = formData.phone;
       if (formData.address !== user?.data?.address)
         updatedFields.address = formData.address;
+
+      if (formData.about !== user?.data?.about)
+        updatedFields.about = formData.about;
 
       // Update photoUrl only if a new image was uploaded
       if (imageFile && imageUrl !== user?.data?.photoUrl) {
@@ -166,8 +170,15 @@ export default function UpdateUserProfile({ user }: { user: TUserData }) {
                     label="Address"
                     defaultValue={user?.data?.address}
                   />
+                  <br />
+                  <GlobeTextArea
+                    name="about"
+                    label="About"
+                    defaultValue={user?.data?.about}
+                  />
+                  <br />
 
-                  <div className="mb-4">
+                  <div className=" mb-4">
                     <label
                       htmlFor="image"
                       className="w-full h-full block rounded-xl py-2 px-3 border border-default-400 text-xs cursor-pointer"

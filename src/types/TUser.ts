@@ -7,6 +7,7 @@ export type TUserData = {
     photoUrl: string;
     subscriptions: "free" | "premium";
     role: string;
+    about: string;
     address: string;
     followers: string[];
     following: string[];
@@ -21,6 +22,7 @@ export type TUser = {
   email: string;
   phone: string;
   photoUrl: string;
+  about?: string;
   subscriptions: "free" | "premium";
   role: string;
   address: string;
