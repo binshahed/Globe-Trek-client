@@ -1,5 +1,4 @@
 import ChartLoading from "@/src/components/UI/ChartLoading";
-import { useGetAllPaymentsQuery } from "@/src/store/features/payment/paymentApi";
 import React, { useMemo } from "react";
 import {
   BarChart,
@@ -16,10 +15,13 @@ type MonthlyData = {
   total: number;
 };
 
-const PaymentList = () => {
-  const { data: payments, isLoading } = useGetAllPaymentsQuery(undefined);
-
-
+const PaymentList = ({
+  payments,
+  isLoading
+}: {
+  payments: any;
+  isLoading: boolean;
+}) => {
   const paymentData = payments?.data || [];
 
   const monthlyData: any = useMemo(() => {

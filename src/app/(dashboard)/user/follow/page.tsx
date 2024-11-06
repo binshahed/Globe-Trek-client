@@ -55,6 +55,7 @@ const FollowPage = () => {
                   radius="full"
                   size="sm"
                   variant="bordered"
+                  className="mb-2"
                   onClick={() => handleFollowToggle(f?._id)}
                 >
                   Unfollow

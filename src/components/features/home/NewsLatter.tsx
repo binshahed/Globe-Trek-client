@@ -5,10 +5,8 @@ const NewsLatter = () => {
   return (
     <div className=" py-16 px-6 font-[sans-serif]">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-5xl font-bold mb-6 text-white">
-          Subscribe to Our Newsletter
-        </h2>
-        <p className="text-base text-gray-300">
+        <h2 className="text-5xl font-bold mb-6">Subscribe to Our Newsletter</h2>
+        <p className="text-base ">
           Stay updated with the latest news, trends, and special offers. Don't
           miss out on our exciting updates.
         </p>

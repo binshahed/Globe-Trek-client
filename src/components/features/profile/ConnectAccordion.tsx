@@ -4,7 +4,7 @@ import { Accordion, AccordionItem, Avatar } from "@nextui-org/react";
 import Link from "next/link";
 
 const ConnectAccordion = ({ user }: { user: TUser }) => {
-  console.log(user);
+
 
   return (
     <Accordion>

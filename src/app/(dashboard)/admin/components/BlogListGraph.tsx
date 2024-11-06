@@ -1,5 +1,5 @@
 import ChartLoading from "@/src/components/UI/ChartLoading";
-import { useGetAllBlogsQuery } from "@/src/store/features/blog/blogApi";
+
 
 import React, { useMemo } from "react";
 import {
@@ -17,10 +17,13 @@ type MonthlyData = {
   count: number;
 };
 
-const BlogListGraph = () => {
-  const { data: posts, isLoading } = useGetAllBlogsQuery(undefined);
-
-
+const BlogListGraph = ({
+  posts,
+  isLoading
+}: {
+  posts: any;
+  isLoading: boolean;
+}) => {
   const postData = posts?.data || [];
 
   // Group posts by month and count the number of posts

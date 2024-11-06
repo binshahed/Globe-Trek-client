@@ -246,7 +246,7 @@
   resolved "https://registry.yarnpkg.com/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-14.2.4.tgz#e65a1c6539a671f97bb86d5183d6e3a1733c29c7"
   integrity sha512-tkLrjBzqFTP8DVrAAQmZelEahfR9OxWpFR++vAI9FBhCiIxtwHwBHC23SBHCTURBtwB4kc/x44imVOnkKGNVGg==
 
-"@nextui-org/accordion@2.0.40":
+"@nextui-org/accordion@2.0.40", "@nextui-org/accordion@^2.0.40":
   version "2.0.40"
   resolved "https://registry.yarnpkg.com/@nextui-org/accordion/-/accordion-2.0.40.tgz#b163afd0c6249a7a48fed2c30467bebe9be9d18f"
   integrity sha512-aJmhflLOXOFTjbBWlWto30hYzimw+sw1EZwSRG9CdxbjRact2dRfCLsZQmHkJW2ifVx51g/qLNE2NSFAi2L8dA==
@@ -5294,6 +5294,11 @@ react-dom@18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
+react-google-charts@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-5.2.1.tgz#d9cbe8ed45d7c0fafefea5c7c3361bee76648454"
+  integrity sha512-mCbPiObP8yWM5A9ogej7Qp3/HX4EzOwuEzUYvcfHtL98Xt4V/brD14KgfDzSNNtyD48MNXCpq5oVaYKt0ykQUQ==
+
 react-hook-form@^7.53.0:
   version "7.53.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.53.0.tgz#3cf70951bf41fa95207b34486203ebefbd3a05ab"
@@ -5303,6 +5308,18 @@ react-icons@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.3.0.tgz#ccad07a30aebd40a89f8cfa7d82e466019203f1c"
   integrity sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==
+
+react-infinite-scroll-hook@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroll-hook/-/react-infinite-scroll-hook-5.0.1.tgz#bda5a082a8178c586055dc482a04a2d7198d2f9b"
+  integrity sha512-fn6+8BAZLQ9C1fvO5kPicGjDR2WHxK7rP4aaSWuaJkvtoJjYuudGJ9wjgPox7dghKm5Xj9cpKFycM86/wAJ3ig==
+  dependencies:
+    react-intersection-observer-hook "^3.0.0"
+
+react-intersection-observer-hook@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer-hook/-/react-intersection-observer-hook-3.0.1.tgz#bc56fd9da64d26e45d277bba10ccad57c7510a64"
+  integrity sha512-nehzFUV+jVY49tc9FOm4yJHrmFFtCmsBZKiN1rUUB2675CMBf6kKu1ekuTqvCnmh4XG7RFP3bMyAevfqfV94xw==
 
 react-is@^16.10.2, react-is@^16.13.1:
   version "16.13.1"

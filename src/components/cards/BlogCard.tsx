@@ -6,7 +6,7 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 const BlogCard = ({ blog }: { blog: any }) => {
   return (
     <div
-      className="relative flex flex-col my-6 bg-default shadow-sm border border-default rounded-lg"
+      className="relative flex flex-col my-6 bg-background/60 dark:bg-default-100/50 shadow-sm border border-default rounded-lg"
       key={blog?._id}
     >
       <div className="relative h-56 m-2.5 overflow-hidden text-default rounded-md">

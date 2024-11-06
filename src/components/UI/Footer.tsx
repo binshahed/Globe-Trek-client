@@ -6,80 +6,98 @@ import {
   FaInstagram,
   FaLinkedin
 } from "react-icons/fa";
+import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-default-50 text-default-700 py-8">
+    <footer className="bg-default-100 py-12">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Links Section */}
+          {/* Logo and Travel Info Section */}
+          <div className="space-y-4">
+            <div className="flex items-center">
+              <Image
+                src="/logo1.png"
+                alt="Globe Trek Logo"
+                width={200}
+                height={100}
+              />
+            </div>
+            <p className="text-sm  max-w-xs">
+              Your go-to platform for unforgettable travel experiences. Discover
+              destinations, book adventures, and explore the world with us.
+            </p>
+            <div className="flex items-center space-x-4">
+              <Link
+                href="#"
+                aria-label="Facebook"
+                className="hover:text-blue-500"
+              >
+                <FaFacebookF size={20} />
+              </Link>
+              <Link
+                href="#"
+                aria-label="Twitter"
+                className="hover:text-blue-500"
+              >
+                <FaTwitter size={20} />
+              </Link>
+              <Link
+                href="#"
+                aria-label="Instagram"
+                className="hover:text-pink-500"
+              >
+                <FaInstagram size={20} />
+              </Link>
+              <Link
+                href="#"
+                aria-label="LinkedIn"
+                className="hover:text-blue-700"
+              >
+                <FaLinkedin size={20} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Quick Links Section */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
               <li>
-                <a href="/" className="hover:text-blue-400">
+                <Link href="/" className="hover:text-blue-500">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="hover:text-blue-400">
+                <Link href="/about" className="hover:text-blue-500">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="hover:text-blue-400">
+                <Link href="/contact" className="hover:text-blue-500">
                   Contact
-                </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/blog" className="hover:text-blue-500">
+                  Blogs
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Contact Information Section */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-            <p className="mb-2">Email: info@globetrek.com</p>
-            <p className="mb-2">Phone: +123 456 7890</p>
-            <p>Address: 123 Travel Lane, Adventure City</p>
-          </div>
-
-          {/* Social Media Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Follow Us</h3>
-            <div className="flex space-x-4">
-              <Link
-                href="#"
-                className="hover:text-blue-400"
-                aria-label="Facebook"
-              >
-                <FaFacebookF />
-              </Link>
-              <Link
-                href="#"
-                className="hover:text-blue-400"
-                aria-label="Twitter"
-              >
-                <FaTwitter />
-              </Link>
-              <Link
-                href="#"
-                className="hover:text-blue-400"
-                aria-label="Instagram"
-              >
-                <FaInstagram />
-              </Link>
-              <Link
-                href="#"
-                className="hover:text-blue-400"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin />
-              </Link>
-            </div>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <p className="text-sm mb-2">Email: info@globetrek.com</p>
+            <p className="text-sm mb-2">Phone: +123 456 7890</p>
+            <p className="text-sm">Address: 123 Travel Lane, Adventure City</p>
           </div>
         </div>
 
         {/* Copyright Section */}
-        <div className="mt-8 text-center border-t border-gray-700 pt-4">
+        <div className="mt-12 text-center text-sm border-t border-gray-300 pt-6">
           <p>
             &copy; {new Date().getFullYear()} Globe Trek. All rights reserved.
           </p>

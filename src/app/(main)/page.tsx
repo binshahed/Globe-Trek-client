@@ -11,13 +11,12 @@ import envConfig from "@/src/config";
 import Link from "next/link";
 
 export default async function HomePage() {
-  const res = await fetch(`${envConfig.baseApi}/blog?limit=5`, {
+  const res = await fetch(`${envConfig.baseApi}/blog?limit=6`, {
     cache: "no-store"
   });
   const data = await res.json();
 
   const blogs = data?.data;
-  console.log(blogs);
 
   return (
     <div>
@@ -43,7 +42,7 @@ export default async function HomePage() {
                   className=" border dark:text-white hover:text-white font-bold text-2xl py-2 px-4 rounded flex
                hover:bg-black hover:border-0 transition ease-in-out duration-300 transform hover:scale-105"
                 >
-                  Read More
+                  Load More Blogs
                 </button>
               </Link>
             </div>

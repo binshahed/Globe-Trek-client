@@ -1,5 +1,5 @@
 import ChartLoading from "@/src/components/UI/ChartLoading";
-import { useGetUsersQuery } from "@/src/store/features/user/userApi";
+
 
 import React, { useMemo } from "react";
 import {
@@ -17,10 +17,13 @@ type MonthlyData = {
   count: number;
 };
 
-const TotalUserListGraph = () => {
-  const { data: users, isLoading } = useGetUsersQuery(undefined);
-
-
+const TotalUserListGraph = ({
+  users,
+  isLoading
+}: {
+  users: any;
+  isLoading: boolean;
+}) => {
   const userData = users?.data || [];
 
   // Group users by month and count the number of registrations
