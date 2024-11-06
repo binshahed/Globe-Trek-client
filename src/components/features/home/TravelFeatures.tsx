@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Container from "../../UI/Container";
+import Link from "next/link";
 
 const TravelFeatures = () => {
   return (
@@ -33,12 +34,14 @@ const TravelFeatures = () => {
                 is convenient for your travel plans. Look for amenities like
                 free Wi-Fi, breakfast, and easy access to restaurants and bars.
               </p>
-              <button
-                className=" border dark:text-white hover:text-white font-bold text-2xl py-2 px-4 rounded flex
+              <Link href="/blog">
+                <button
+                  className=" border dark:text-white hover:text-white font-bold text-2xl py-2 px-4 rounded flex
                hover:bg-black hover:border-0 transition ease-in-out duration-300 transform hover:scale-105"
-              >
-                Read More
-              </button>
+                >
+                  Read More
+                </button>
+              </Link>
             </div>
           </div>
         </div>

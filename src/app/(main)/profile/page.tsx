@@ -1,7 +1,7 @@
 import TabContent from "@/src/components/features/profile/TabContent";
 import Container from "@/src/components/UI/Container";
 
-import ProfileSection from "./sections/ProfileSection";
+import ProfileSection from "./components/ProfileSection";
 
 const Profile = () => {
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../../UI/Container";
+import Link from "next/link";
 
 const BannerSection = () => {
   return (
@@ -25,12 +26,16 @@ const BannerSection = () => {
           <p className="text-center text-white text-lg md:text-2xl lg:text-2xl my-8 md:px-36 font-thin">
             Join us on an incredible journey as we explore breathtaking
             destinations, uncover unique experiences, and reveal hidden gems
-            from every corner of the world. <br /> <strong>Pack your bags and come along for
-            the adventure of a lifetime!</strong>
+            from every corner of the world. <br />{" "}
+            <strong>
+              Pack your bags and come along for the adventure of a lifetime!
+            </strong>
           </p>
-          <button className=" border  text-white font-bold text-2xl py-2 px-4 rounded flex mx-auto hover:bg-black hover:border-0 transition ease-in-out duration-300 transform hover:scale-105">
-            Start Exploring
-          </button>
+          <Link href="/blog">
+            <button className=" border  text-white font-bold text-2xl py-2 px-4 rounded flex mx-auto hover:bg-black hover:border-0 transition ease-in-out duration-300 transform hover:scale-105">
+              Start Exploring
+            </button>
+          </Link>
         </Container>
       </div>
 

@@ -58,11 +58,6 @@ const AvatarDropDown = () => {
             Dashboard
           </Link>
         </DropdownItem>
-        <DropdownItem key="claim_request">
-          <Link href="/profile/change-password" className="block">
-            Settings
-          </Link>
-        </DropdownItem>
 
         <DropdownItem key="logout" color="danger" onClick={handleLogout}>
           Log Out

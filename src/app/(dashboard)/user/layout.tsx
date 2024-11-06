@@ -17,6 +17,12 @@ const Layout = ({ children }: LayoutProps) => {
               href="/user"
               className="block text-default-800 hover:text-blue-500 mb-2"
             >
+              Dashboard
+            </Link>
+            <Link
+              href="/user/manage-blog"
+              className="block text-default-800 hover:text-blue-500 mb-2"
+            >
               Manage Blog
             </Link>
             <Link
@@ -24,6 +30,18 @@ const Layout = ({ children }: LayoutProps) => {
               className="block text-default-800 hover:text-blue-500 mb-2"
             >
               Followers/Following
+            </Link>
+            <Link
+              href="/user/change-password"
+              className="block text-default-800 hover:text-blue-500 mb-2"
+            >
+              Change Password
+            </Link>
+            <Link
+              href="/user/verify-profile"
+              className="block text-default-800 hover:text-blue-500 mb-2"
+            >
+              Make Payment
             </Link>
           </nav>
         </aside>

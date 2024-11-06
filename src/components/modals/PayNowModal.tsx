@@ -36,7 +36,7 @@ export default function PayNowModal({ blogData }: { blogData: any }) {
   }, [data, user?.data, isLoading]);
 
   const handlePayNow = () => {
-    router.push("/profile/verify-profile");
+    router.push(`/${user?.data?.role}/verify-profile`);
   };
 
   const handleBackToHome = () => {

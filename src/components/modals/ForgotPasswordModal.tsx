@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useForgotPasswordMutation } from "@/src/store/features/auth/authApi";
 import {
   Modal,
@@ -33,7 +34,9 @@ export default function ForgotPasswordModal() {
 
   return (
     <>
-      <button onClick={onOpen}>Forgot Password?</button>
+      <p onClick={onOpen} className="cursor-pointer">
+        Forgot Password?
+      </p>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           <>
